@@ -21,4 +21,5 @@ public static void main (String[] args) {
     scores[5] = 100;
     scores[6] = 100;
     }
+    
 }
