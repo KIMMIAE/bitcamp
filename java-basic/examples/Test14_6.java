@@ -16,6 +16,7 @@ public class Test14_6 {
                 sum = kor + eng + math;
                 aver = sum / 3.0f;
 
+                
                 } 
         }
 
