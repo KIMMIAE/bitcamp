@@ -44,7 +44,7 @@ public class Test15_5 {
 
 
         a = 10;
-        a = ++a;
+        a = ++a;         
         System.out.println(a);
 
         b = 10;
