@@ -1,8 +1,25 @@
 
 apply plugin: 'java'
-
-
 apply plugin: 'application'
+apply plugin: 'eclipse'
+
+
+eclipse {
+  jdt {
+    sourceCompatibility = 9
+    targetCompatibility = 9
+    javaRuntimeName = "JavaSE-9"
+    file {
+      whenMerged { jdt
+      }
+      withProperties { properties ->
+        properties["org.eclipse.jdt.core.compiler.codegen.targetPlatform"] = "9"
+        properties["org.eclipse.jdt.core.compiler.source"] = "9"
+        properties["org.eclipse.jdt.core.compiler.compliance"] = "9"
+      }
+    }
+  }
+}
 
 compileJava {
     options.encoding = 'UTF-8'
@@ -12,17 +29,16 @@ javadoc {
     options.encoding = "UTF-8"
 }
 
-
 repositories {
 
     jcenter()
 }
 
 dependencies {
-  
+   
     compile 'com.google.guava:guava:22.0'
 
-
+ 
     testCompile 'junit:junit:4.12'
 }
 
