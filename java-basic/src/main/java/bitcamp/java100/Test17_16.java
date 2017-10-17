@@ -1,6 +1,5 @@
 package bitcamp.java100;
 
-import bitcamp.java100.other.Test17_16_C;
 
 public class Test17_16 {  
 
