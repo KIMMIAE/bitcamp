@@ -18,7 +18,7 @@ package bitcamp.java100;
 
 import java.io.Console;
 
-public class Test21_6 {
+public class Test21_6_X {
 
     public static void main(String[] args) {
         

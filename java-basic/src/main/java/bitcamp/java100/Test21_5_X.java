@@ -18,7 +18,7 @@ package bitcamp.java100;
 
 import java.io.Console;
 
-public class Test21_5 {
+public class Test21_5_X {
 
     public static void main(String[] args) {
         class Dan {
@@ -44,16 +44,17 @@ public class Test21_5 {
         }
         
         else {
-            if (d.x < 0) {
-                System.out.println("다음에 또 봐요!");
+        if (d.x < 0) {
+            System.out.println("다음에 또 봐요!");
             }
-            else {
-                if (1 <= d.x ) {
-                    System.out.println("2에서 9단까지만 가능합니다!");
+            
+        else {
+        if (1 <= d.x ) {
+            System.out.println("2에서 9단까지만 가능합니다!");
                 }
-                else {
-                    if (10 <= d.x) {
-                        System.out.println("2에서 9단까지만 가능합니다!");
+        else {
+        if (10 <= d.x) {
+            System.out.println("2에서 9단까지만 가능합니다!");
                     }
                 }
             }

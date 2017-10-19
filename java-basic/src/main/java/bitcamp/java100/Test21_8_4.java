@@ -34,14 +34,8 @@
 package bitcamp.java100;
 
 import java.io.Console;
-// 5단계: 연락처 데이터를 저장할 새로운 데이터 타입을 만든다.
-public class Test21_8 {
-    // 새 데이터 타입 정의
-    static class Contact {
-        String name;
-        String email;
-        String tel;
-    }
+// 4단계: 저장할지 말지 여부를 ...
+public class Test21_8_4 {
 
 
     public static void main(String[] args) {
@@ -53,28 +47,25 @@ public class Test21_8 {
             System.exit(1); // JVM을 종료한다.
         }
         
-        // Contact 값을 저장할 레퍼런스 배열을 만든다.
-        Contact[] contacts = new Contact[100]; // 데이터가 담겨있는 객체, 주소가 100개 라는 말(인스턴스는 100개 만들지 못함)
-    
+        // 값을 저장할 레퍼런스 배열을 만든다.
+        String[] names = new String[100];
+        String[] emails = new String[100];
+        String[] tels = new String[100];
+        
         // 값이 저장될 위치
         int cursor = 0;
         
-        // 배열의 개수 만큼 입력을 받는다.
-        while (cursor < contacts.length) {
-            // 사용자가 입력한 데이터를 저장할 메모리 준비.
-            Contact contact = new Contact();
-        
-        // 사용자가 입력한 데이터를 Contact 인스턴스(객체)에 저장한다.    
-        contact.name = console.readLine("이름? ");
-        contact.email = console.readLine("이메일? ");
-        contact.tel = console.readLine("전화? ");
-        
+        while (cursor < names.length) { 
+        String name = console.readLine("이름? ");
+        String email = console.readLine("이메일? ");
+        String tel = console.readLine("전화? ");
         String response = console.readLine("저장하시겠습니까?(y/n) "); // 대문자 입력도 OK
         
         if (response.toLowerCase().equals("y") || 
                 response.toLowerCase().equals("yes")) {
-            // 이름, 이메일, 전화 데이터가 들어있는 인스턴스 주소를 배열에 저장.
-            contacts[cursor] = contact;
+            names[cursor] = name;
+            emails[cursor] = email;
+            tels[cursor] = tel;
             cursor++;
         }
         
@@ -86,10 +77,7 @@ public class Test21_8 {
         
         
     for (int i= 0; i < cursor; i++) {
-        System.out.printf("%s, %s, %s\n", 
-                contacts[i].name, 
-                contacts[i].email, 
-                contacts[i].tel);
+        System.out.printf("%s, %s, %s\n", names[i], emails[i], tels[i]);
         }
     }
 }
