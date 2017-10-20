@@ -31,11 +31,11 @@
 // 안중근      ahn@test.com 1111-1114
 // > 
 
-package bitcamp.java100;
+package bitcamp.java100.test21.step5;
 
 import java.io.Console;
 // 5단계: 연락처 데이터를 저장할 새로운 데이터 타입을 만든다.
-public class Test21_8 {
+public class Test {
     // 새 데이터 타입 정의
     static class Contact {
         String name;

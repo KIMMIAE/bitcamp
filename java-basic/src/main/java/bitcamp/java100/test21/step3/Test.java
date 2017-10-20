@@ -31,11 +31,11 @@
 // 안중근      ahn@test.com 1111-1114
 // > 
 
-package bitcamp.java100;
+package bitcamp.java100.test21.step3;
 
 import java.io.Console;
 // 3단계: 계속 입력할지 여부를 묻는 기능 추가.
-public class Test21_8_3 {
+public class Test {
 
 
     public static void main(String[] args) {

@@ -34,8 +34,8 @@
 package bitcamp.java100;
 
 import java.io.Console;
-// 2단계: 배열을 사용하여 여러 개의 값을 저장한다.
-public class Test21_8_2 {
+
+public class TestX {
 
 
     public static void main(String[] args) {
@@ -47,31 +47,13 @@ public class Test21_8_2 {
             System.exit(1); // JVM을 종료한다.
         }
         
-        // 값을 저장할 레퍼런스 배열을 만든다.
-        String[] names = new String[3];
-        String[] emails = new String[3];
-        String[] tels = new String[3];
+        String name = console.readLine("이름? ");
+        String email = console.readLine("이메일? ");
+        String tel = console.readLine("전화? ");
         
-        // 값이 저장될 위치
-        int cursor = 0;
-        
-        while (cursor < names.length) {
-        names[cursor] = console.readLine("이름? ");
-        emails[cursor] = console.readLine("이메일? ");
-        tels[cursor] = console.readLine("전화? ");
-        cursor++;
-        }
-        
-        cursor = 0;
-        
-        while (cursor < names.length) {
-        System.out.println(names[cursor]);
-        System.out.println(emails[cursor]);
-        System.out.println(tels[cursor]);
-        cursor++;
-        }
-        
-        
+        System.out.printf("%s", name);
+        System.out.printf("%s", email);
+        System.out.printf("%s", tel);
         
     }
 }

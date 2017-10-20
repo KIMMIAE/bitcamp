@@ -31,11 +31,11 @@
 // 안중근      ahn@test.com 1111-1114
 // > 
 
-package bitcamp.java100;
+package bitcamp.java100.test21.step1;
 
 import java.io.Console;
-// 4단계: 저장할지 말지 여부를 ...
-public class Test21_8_4 {
+// 1단계: 변수를 사용하여 사용자가 입력한 값을 저장한다.
+public class Test {
 
 
     public static void main(String[] args) {
@@ -47,37 +47,16 @@ public class Test21_8_4 {
             System.exit(1); // JVM을 종료한다.
         }
         
-        // 값을 저장할 레퍼런스 배열을 만든다.
-        String[] names = new String[100];
-        String[] emails = new String[100];
-        String[] tels = new String[100];
-        
-        // 값이 저장될 위치
-        int cursor = 0;
-        
-        while (cursor < names.length) { 
         String name = console.readLine("이름? ");
         String email = console.readLine("이메일? ");
         String tel = console.readLine("전화? ");
-        String response = console.readLine("저장하시겠습니까?(y/n) "); // 대문자 입력도 OK
         
-        if (response.toLowerCase().equals("y") || 
-                response.toLowerCase().equals("yes")) {
-            names[cursor] = name;
-            emails[cursor] = email;
-            tels[cursor] = tel;
-            cursor++;
-        }
-        
-        response = console.readLine("계속 입력하시겠습니까?(y/n) "); //메서드 블록안에 중복이름을 갖는 변수를 선언할 수 없음!
-        if (!(response.toLowerCase().equals("y") ||
-             response.toLowerCase().equals("yes")))
-            break;
-        }
+        System.out.println(name);
+        System.out.println(email);
+        System.out.println(tel);
         
         
-    for (int i= 0; i < cursor; i++) {
-        System.out.printf("%s, %s, %s\n", names[i], emails[i], tels[i]);
-        }
+        
+        
     }
 }
