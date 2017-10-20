@@ -14,6 +14,7 @@ public class Test18_5 {
         System.out.println(s2);
         // String 인스턴스의 값은 한 번 정해지면 변경할 수 없음 = "immutable object"라 부름.
         
+        
         System.out.println(s1.charAt(4));
         
         s1 = "ABBCDEBBFGH";
