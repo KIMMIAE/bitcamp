@@ -1,4 +1,4 @@
-public class App_4 {
+public class App_5 {
 
     
     static void print(Score score) {
