@@ -17,14 +17,13 @@ public class App_4 {
     
     public static void main(String[] args) {
         ScoreDao scoreDao = new ScoreDao();
-        ScoreDao scoreDao2 = new ScoreDao();
         
         while (true) {
             Score score = new Score();
             score.input();  // 사용자로부터 입력받은 데이터를 빈 객체에 저장한다.
             
             // 인스턴스( 주소)를 배열에 저장한다.
-            scoreDao.add(score);
+            ScoreDao.add(score);
             
             if (!confirm("계속하시겠습니까? "))
                 break;
@@ -33,8 +32,8 @@ public class App_4 {
         
         // 레퍼런스 배열에 저장된 각각의 인스턴스 주소로 찾아가서
         // 성적 데이터를 출력한다.
-        for (int i = 0; i < scoreDao.size(); i++) {
-            scoreDao.get(i).print();
+        for (int i = 0; i < ScoreDao.size(); i++) {
+            ScoreDao.get(i).print();
         }
         }
     }

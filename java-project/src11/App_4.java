@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
-// Score 객체의 주소를 저장하고 꺼내는 코드를 별도의 클래스로 분리하라!
-
+// 키보드로 성적 정보를 입력받아 저장하라!
+// 계속 저장할지 여부를 물어 저장을 물어봐라!
+// 저장을 완료하면 모든 성적을 출력하라!
 
 public class App_4 {
 
@@ -16,15 +17,15 @@ public class App_4 {
     }
     
     public static void main(String[] args) {
-        ScoreDao scoreDao = new ScoreDao();
-        ScoreDao scoreDao2 = new ScoreDao();
+        Score[] scores = new Score[100];
+        int cursor = 0;
         
         while (true) {
             Score score = new Score();
             score.input();  // 사용자로부터 입력받은 데이터를 빈 객체에 저장한다.
             
             // 인스턴스( 주소)를 배열에 저장한다.
-            scoreDao.add(score);
+            scores[cursor++] = score;
             
             if (!confirm("계속하시겠습니까? "))
                 break;
@@ -33,8 +34,8 @@ public class App_4 {
         
         // 레퍼런스 배열에 저장된 각각의 인스턴스 주소로 찾아가서
         // 성적 데이터를 출력한다.
-        for (int i = 0; i < scoreDao.size(); i++) {
-            scoreDao.get(i).print();
+        for (int i = 0; i < cursor; i++) {
+            scores[i].print();
         }
         }
     }
