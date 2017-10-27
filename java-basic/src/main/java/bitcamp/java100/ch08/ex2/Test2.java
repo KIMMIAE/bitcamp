@@ -35,6 +35,7 @@ public class Test2 {
         //c = new Boat(); // 다른 파생 분류를 가리킬 수 없다.
         //c = new Vehicle(); // 상위 분류를 가리킬 수 없다.
         
+        /*
         c = new Vehicle(); // 이게 가능하다고 가정했을 때,
         
         c.model = "소나타";
@@ -43,6 +44,7 @@ public class Test2 {
         c.enginType = 1;
         c.cylinder = 4;
         c.valve = 16;
+        */
     }
 
 }

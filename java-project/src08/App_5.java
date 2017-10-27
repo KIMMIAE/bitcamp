@@ -1,3 +1,5 @@
+import java100.app.Score;
+
 public class App_5 {
 
     
