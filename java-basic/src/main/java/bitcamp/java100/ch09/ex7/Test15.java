@@ -1,9 +1,11 @@
 // 컬렉션 API - HashMap
 package bitcamp.java100.ch09.ex7;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
-public class Test7 {
+public class Test15 {
     static class Contact {
         String name;
         String email;
@@ -34,21 +36,20 @@ public class Test7 {
         map.put("aaa",c1);
         map.put("bbb",c2);
         map.put("ccc",c3);
+       
+        Iterator<Contact> iterator = map.values().iterator(); // 현업에선 이렇게 씀.
+                                                              // 한 번 쓰고 말 변수는 따로 선언 안하는 게 편해서
+        /*
+        // 공부할 때(이해하기 쉬우려고)쓴 방식
+        Collection<Contact> values = map.values();
         
+        Iterator<Contact> iterator = values.iterator();
+        */
         
-        System.out.println(map.get("aaa"));
-        System.out.println(map.get("bbb"));
-        System.out.println(map.get("ccc"));
-        
-        String key = new String("aaa");
-        
-        System.out.println("aaa" == key);
-        System.out.println("aaa".hashCode()); // String 인스턴스의 hashCode
-        System.out.println(key.hashCode());
-        System.out.println("aaa".equals(key));
-        
-        System.out.println(map.get(key));
-        
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+            
+        }
         
         
     }
