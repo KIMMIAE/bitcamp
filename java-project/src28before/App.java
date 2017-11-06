@@ -6,10 +6,10 @@ import java.util.Scanner;
 import java100.app.control.BoardController;
 import java100.app.control.GenericController;
 import java100.app.control.MemberController;
-import java100.app.control.RoomController;
 import java100.app.control.ScoreController;
+import java100.app.domain.Room;
 
-// 추상 클래스 사용 후
+// 추상 클래스 사용 전
 //
 public class App {
 
@@ -27,7 +27,7 @@ public class App {
         // Room 정보를 다룰 컨트롤러를 따로 만들지 않고 
         // 지금처럼 그냥 GenericController 클래스를 사용했다.
         // 이거 안됨. 문제임.
-        controllerMap.put("4", new RoomController());
+        controllerMap.put("4", new GenericController<Room>());
         loop: while (true) {
             System.out.print("명령> ");
             String[] input = keyScan.nextLine().toLowerCase().split(" ");

@@ -50,15 +50,7 @@ public class ScoreController {
         System.out.println("[학생 삭제]");
         String name = Prompts.input("이름? ");
         
-        Score score = null;
-        Iterator<Score> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            Score temp = iterator.next();
-            if (temp.name.equals(name)) {
-                score = temp;
-                break;
-            }
-        }
+        Score score = findByScore(name);
         
         if (score == null) {
             System.out.printf("'%s'의 성적 정보가 없습니다.\n", name);
@@ -76,15 +68,7 @@ public class ScoreController {
         System.out.println("[학생 정보 변경]");
         String name = Prompts.input("이름? ");
         
-        Score score = null;
-        Iterator<Score> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            Score temp = iterator.next();
-            if (temp.name.equals(name)) {
-                score = temp;
-                break;
-            }
-        }
+        Score score = findByScore(name);
         
         if (score == null) {
             System.out.printf("'%s'의 성적 정보가 없습니다.\n", name);
@@ -97,15 +81,8 @@ public class ScoreController {
         System.out.println("[학생 정보]");
         String name = Prompts.input("이름? ");
         
-        Score score = null;
-        Iterator<Score> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            Score temp = iterator.next();
-            if (temp.name.equals(name)) {
-                score = temp;
-                break;
-            }
-        }
+        Score score = findByScore(name);
+        
         
         if (score == null) {
             System.out.printf("'%s'의 성적 정보가 없습니다.\n", name);
@@ -138,4 +115,17 @@ public class ScoreController {
         }
         
     }
+    
+    private Score findByScore(String name) {
+        Iterator<Score> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Score score = iterator.next();
+            if (score.name.equals(name)) {
+                score = score;
+                return score;
+            }
+        }
+        return null;
+    }
+    
 }

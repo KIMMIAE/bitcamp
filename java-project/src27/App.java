@@ -6,10 +6,16 @@ import java.util.Scanner;
 import java100.app.control.BoardController;
 import java100.app.control.GenericController;
 import java100.app.control.MemberController;
-import java100.app.control.RoomController;
 import java100.app.control.ScoreController;
 
-// 추상 클래스 사용 후
+// 리팩토링
+// 1) 사용자 정의 데이터 타입 클래스는 보통 "domain"이라는 패키지에 둔다.
+//    "business domain(업무 영역)에서 사용하는 값이다"라는 의미이다.
+//    또는 값을 표현하는 클래스라고 해서 "value object"의 약자인 
+//    "vo" 패키지에 두는 경우도 있다.
+// 2) UI를 담당하는 컨트롤러 클래스는 "control"이라는 패키지에 둔다.
+// 3) 기타 여러 곳에서 사용된느 클래스는 "util"이라는 패키지에 둔다.
+//
 //
 public class App {
 
@@ -23,11 +29,7 @@ public class App {
         controllerMap.put("1", new ScoreController());
         controllerMap.put("2", new MemberController());
         controllerMap.put("3", new BoardController()); // 여기서만 추가 수정하면 됨. 상속을 활용한 처리방법
-        
-        // Room 정보를 다룰 컨트롤러를 따로 만들지 않고 
-        // 지금처럼 그냥 GenericController 클래스를 사용했다.
-        // 이거 안됨. 문제임.
-        controllerMap.put("4", new RoomController());
+
         loop: while (true) {
             System.out.print("명령> ");
             String[] input = keyScan.nextLine().toLowerCase().split(" ");
