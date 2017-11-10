@@ -1,10 +1,11 @@
 package java100.app;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Scanner;
 
 import java100.app.control.BoardController;
-import java100.app.control.GenericController;
+import java100.app.control.Controller;
 import java100.app.control.MemberController;
 import java100.app.control.RoomController;
 import java100.app.control.ScoreController;
@@ -13,25 +14,22 @@ import java100.app.control.ScoreController;
 //
 public class App {
 
-    static HashMap<String, GenericController<?>> controllerMap = new HashMap<>();
     static Scanner keyScan = new Scanner(System.in);
-    static ScoreController scoreController = new ScoreController();
-    static MemberController memberController = new MemberController();
-    static BoardController boardController = new BoardController();
-
+    static HashMap<String, Controller> controllerMap = new HashMap<>();
+    
     public static void main(String[] args) {
-        controllerMap.put("1", new ScoreController());
-        controllerMap.put("2", new MemberController());
-        controllerMap.put("3", new BoardController()); // 여기서만 추가 수정하면 됨. 상속을 활용한 처리방법
+        controllerMap.put("1", new ScoreController("./data/score.csv"));
+        controllerMap.put("2", new MemberController("./data/member.csv"));
+        controllerMap.put("3", new BoardController("./data/board.csv")); // 여기서만 추가 수정하면 됨. 상속을 활용한 처리방법
         
         // Room 정보를 다룰 컨트롤러를 따로 만들지 않고 
         // 지금처럼 그냥 GenericController 클래스를 사용했다.
         // 이거 안됨. 문제임.
-        controllerMap.put("4", new RoomController());
+        controllerMap.put("4", new RoomController("./data/room.csv")); // 컴파일 오류!
         loop: while (true) {
             System.out.print("명령> ");
             String[] input = keyScan.nextLine().toLowerCase().split(" ");
-
+ 
             try {
                 switch (input[0]) {
                 case "menu":
@@ -60,7 +58,7 @@ public class App {
 
     private static void doGo(String menuNo) {
 
-        GenericController<?> controller = controllerMap.get(menuNo);
+        Controller controller = controllerMap.get(menuNo);
 
         if (controller == null) {
             System.out.println("해당 번호의 메뉴가 없습니다.");
@@ -81,6 +79,7 @@ public class App {
         System.out.println("1 성적관리");
         System.out.println("2 회원관리");
         System.out.println("3 게시판");
+        System.out.println("4 강의실관리");
     }
 
     private static void doError() {
@@ -88,7 +87,13 @@ public class App {
     }
 
     private static void doQuit() {
+        Collection<Controller> controls = controllerMap.values();
+        for (Controller control : controls) {
+           control.destroy();
+        }
         System.out.println("프로그램을 종료합니다.");
     }
+    
+    
 
 }
