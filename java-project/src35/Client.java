@@ -17,22 +17,21 @@ public class Client {
         System.out.print("서버주소?");
         String serverAddr = keyboard.nextLine();
 
-        while (true) {
-            System.out.print("명령> ");
-            String command = keyboard.nextLine();
-
-            if (command.equals("quit")) {
-                break;
-            }
-            
-            try (Socket socket = new Socket(serverAddr, 9999);
+        try (Socket socket = new Socket(serverAddr, 9999);
                 PrintStream out = new PrintStream(new BufferedOutputStream(socket.getOutputStream()));
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));) {
 
+            while (true) {
+                System.out.print("명령> ");
+                String command = keyboard.nextLine();
 
                 out.println(command);
                 out.flush();
                 
+                if (command.equals("quit") ||
+                command.equals("server stop")) {
+                    break;
+                }
 
 
                 while (true) {
@@ -45,13 +44,12 @@ public class Client {
 
                 }
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             }
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         keyboard.close();
     }
 
 }
-

@@ -33,11 +33,11 @@ public class App {
     }
 
     void service() throws Exception {
-        ss = new ServerSocket(9999);
+        ServerSocket ss = new ServerSocket(9999);
         System.out.println("서버 실행!");
 
         while (true) {
-            new HTTPAgent(ss.accept()).start();
+            new RequestProcessor(ss.accept()).start();
         }
     }
 
@@ -92,51 +92,40 @@ public class App {
 
     }
 
-    class HTTPAgent extends Thread {
+    class RequestProcessor extends Thread {
         Socket socket;
 
-        public HTTPAgent(Socket socket) {
+        public RequestProcessor(Socket socket) {
             this.socket = socket;
         }
 
         @Override
         public void run() {
             try (
-                    Socket socket = this.socket; // 자동 close() 호출
 
                     BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-                    PrintWriter out = new PrintWriter(new BufferedOutputStream(socket.getOutputStream()));
-                    ) {
+                    PrintWriter out = new PrintWriter(new BufferedOutputStream(socket.getOutputStream()));) {
 
-                    String command = in.readLine().split(" ")[1];
-                    
-                    String header = null;
-                    while(true) {
-                        header = in.readLine();
-                        if (header.equals(""))
-                            break;
-                    }
-                    
-                    out.println("HTTP/1.1 200 OK");
-                    
-                    out.println("Content-Type:text/plain;charset=UTF-8");
-                    
-                    out.println();
-                    
-                    
+                while (true) {
+                    String command = in.readLine();
                     if (command.equals("/")) {
                         hello(command, out);
+                    } else if (command.equals("quit")) {
+                        save();
+                        break;
                     } else {
                         request(command, out);
-                        save();
                     }
                     out.println(); // 응답 완료를 표시하기 위해 빈줄 보냄.
                     out.flush();
+
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
             } // while
         }
+
     }
 }
