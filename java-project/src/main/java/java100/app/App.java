@@ -26,10 +26,17 @@ public class App {
     HashMap<String, Controller> controllerMap = new HashMap<>();
 
     void init() {
-        controllerMap.put("/score", new ScoreController("./data/score.csv"));
-        controllerMap.put("/member", new MemberController("./data/member.csv"));
+        ScoreController scoreController = new ScoreController();
+        scoreController.init();
+        RoomController roomController = new RoomController();
+        roomController.init();
+        MemberController memberController = new MemberController();
+        memberController.init();
+        
+        controllerMap.put("/score", scoreController);
+        controllerMap.put("/member", memberController);
         controllerMap.put("/board", new BoardController("./data/board.csv")); // 여기서만 추가 수정하면 됨. 상속을 활용한 처리방법
-        controllerMap.put("/room", new RoomController("./data/room.csv")); // 컴파일 오류!
+        controllerMap.put("/room", roomController); // 컴파일 오류!
     }
 
     void service() throws Exception {
