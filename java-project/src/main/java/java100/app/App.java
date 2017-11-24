@@ -32,10 +32,12 @@ public class App {
         roomController.init();
         MemberController memberController = new MemberController();
         memberController.init();
+        BoardController boardController = new BoardController();
+        boardController.init();
         
         controllerMap.put("/score", scoreController);
         controllerMap.put("/member", memberController);
-        controllerMap.put("/board", new BoardController("./data/board.csv")); // 여기서만 추가 수정하면 됨. 상속을 활용한 처리방법
+        controllerMap.put("/board", boardController); // 여기서만 추가 수정하면 됨. 상속을 활용한 처리방법
         controllerMap.put("/room", roomController); // 컴파일 오류!
     }
 
