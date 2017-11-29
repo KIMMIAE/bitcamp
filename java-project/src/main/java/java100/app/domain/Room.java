@@ -1,7 +1,6 @@
 package java100.app.domain;
 
 public class Room {
-    
     protected int no;
     protected String location;
     protected String name;
@@ -10,10 +9,12 @@ public class Room {
     public Room() {}
     
     public Room(int no, String location, String name, int capacity) {
+        this.no = no;
         this.location = location;
         this.name = name;
         this.capacity = capacity;
     }
+    
     @Override
     public String toString() {
         return "Room [no=" + no + ", location=" + location + ", name=" + name + ", capacity=" + capacity + "]";
@@ -30,6 +31,7 @@ public class Room {
     public String getLocation() {
         return location;
     }
+
     public void setLocation(String location) {
         this.location = location;
     }
@@ -42,10 +44,6 @@ public class Room {
         this.name = name;
     }
 
-    public void setNo(String no) {
-        this.name = no;
-    }
-
     public int getCapacity() {
         return capacity;
     }
@@ -53,5 +51,6 @@ public class Room {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
-
+    
+    
 }

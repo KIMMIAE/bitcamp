@@ -4,32 +4,26 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 
 public class Request {
-    
-    
+    // 명령어 경로
     private String menuPath;
     
-    private HashMap<String, String> params = new HashMap<>();
+    // 명령어 뒤에 붙어 온 데이터가 있다면 Map 객체에 보관한다.
+    private HashMap<String,String> params = new HashMap<>();
     
     public Request(String command) {
-        
         String[] path = command.split("\\?");
         
         this.menuPath = path[0];
         
-        if (path.length > 1) {
+        if (path.length > 1) { // ? 다음에 문자열이 있다면 
             String[] arr = path[1].split("&");
             for (String param : arr) {
                 String[] kv = param.split("=");
                 try {
-                    
-                
-                this.params.put(kv[0], URLDecoder.decode(kv[1], "UTF-8"));
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-                }
+                    this.params.put(kv[0], URLDecoder.decode(kv[1], "UTF-8"));
+                } catch (Exception e) {}
+            }
         }
-        
     }
     
     public String getMenuPath() {
@@ -39,5 +33,15 @@ public class Request {
     public String getParameter(String name) {
         return this.params.get(name);
     }
-
+    
 }
+
+
+
+
+
+
+
+
+
+

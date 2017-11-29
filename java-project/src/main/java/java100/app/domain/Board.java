@@ -2,8 +2,6 @@ package java100.app.domain;
 
 import java.sql.Date;
 
-import java100.app.control.CSVFormatException;
-
 public class Board {
     protected int no;
     protected String title;
@@ -11,16 +9,12 @@ public class Board {
     protected Date regDate;
     protected int viewCount;
     
-    public Board() {}
-
-    
     @Override
     public String toString() {
         return "Board [no=" + no + ", title=" + title + ", content=" + content + ", regDate=" + regDate + ", viewCount="
                 + viewCount + "]";
     }
 
-    
     public int getNo() {
         return no;
     }

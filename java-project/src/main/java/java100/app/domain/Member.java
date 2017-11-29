@@ -17,14 +17,21 @@ public class Member {
         this.name = name;
         this.email = email;
     }
-    
-    
 
     @Override
     public String toString() {
         return "Member [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", createdDate="
                 + createdDate + "]";
     }
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
+
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -33,12 +40,6 @@ public class Member {
         this.createdDate = createdDate;
     }
 
-    public int getNo() {
-        return no;
-    }
-    public void setNo(int no) {
-        this.no = no;
-    }
     public String getName() {
         return name;
     }
@@ -62,8 +63,8 @@ public class Member {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    }    
+    
+}
 
 
 
