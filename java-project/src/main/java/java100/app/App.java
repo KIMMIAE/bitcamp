@@ -16,42 +16,44 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import java100.app.beans.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
 import java100.app.control.Controller;
 import java100.app.control.Request;
 import java100.app.control.Response;
+import java100.app.control.ScoreController;
 import java100.app.util.DataSource;
 
-// 기존 방식의 문제점
-// - 컨트롤러나 DAO 클래스를 추가할 때 마다 .properties 파일을 변경해야 한다.
-//   
-//
-// 해결 방안
-// 
+@Configuration
+//@ComponentScan(basePackages = "java100.app") //배열 하나일 땐 중괄호 생략 가능!
+// @ComponentScan(value = "java100.app") => 이것도 가능 value = basePackages
+@ComponentScan("java100.app") // 최종적으로 우리가 보게 되는 간결한 코드
 public class App {
 
     ServerSocket ss;
-
-    // 빈 관리 컨테이너 객체
-    ApplicationContext beanContainer;
     
-    void init() {
-        
-        // 빈 관리 컨테이너를 생성할 때 "프로퍼티" 파일의 경로를 넘겨주어
-        // 프로퍼티 파일에 등록된 클래스의 객체를 자동 생성하게 한다.
-        beanContainer = new ApplicationContext("java100.app");
-        
+    // Spring IoC 컨테이너 객체
+    AnnotationConfigApplicationContext IocContainer;
+    
+    // 스프링 IoC 컨테이너에게 getDataSource() 메서드를 호출해서
+    // 이 메서드가 리턴한 객체를 꼭 컨테이너에 보관해달라고 표시!
+    @Bean  // 실무에선 Bean 지정할 일 없음. 여러 개 쓰지 않는 이상.
+    DataSource getDataSource() {
         DataSource ds = new DataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         ds.setUrl("jdbc:mysql://localhost:3306/studydb");
         ds.setUsername("study");
         ds.setPassword("1111");
+        return ds;
+    }
+    
+    void init() {
+
+        IocContainer = new AnnotationConfigApplicationContext(App.class);
         
-        // 밖에서 만든 DataSource는 수동으로 빈 컨테이너에 추가한다.
-        beanContainer.addBean("mysqlDataSource", ds);
-        
-        // 다시 의존 객체 주입을 해야 한다.
-        beanContainer.refreshBeanFactory();
     }
 
     void service() throws Exception {
@@ -74,7 +76,7 @@ public class App {
             menuName = command.substring(0, i);
         }
 
-        Object controller = beanContainer.getBean(menuName);
+        Object controller =  IocContainer.getBean(menuName);
 
         if (controller == null && controller instanceof Controller) {
             out.println("해당 명령을 지원하지 않습니다.");

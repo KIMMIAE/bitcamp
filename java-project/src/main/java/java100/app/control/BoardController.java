@@ -3,7 +3,9 @@ package java100.app.control;
 import java.io.PrintWriter;
 import java.util.List;
 
-import java100.app.annotation.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java100.app.dao.BoardDao;
 import java100.app.domain.Board;
 
@@ -17,12 +19,9 @@ public class BoardController implements Controller {
     // 현재는 App 클래스에서 MySQL DBMS를 사용하는 구현체를 주입해 주지만,
     // 만약 고객사의 DBMS가 Oracle이라면 
     // 그 Oracle을 사용하는 DAO를 주입해줄 것이다.    
+    @Autowired
     BoardDao boardDao;
     
-    public void setBoardDao(BoardDao boardDao) {
-        this.boardDao = boardDao;
-    }
-
     @Override
     public void destroy() {}
     
