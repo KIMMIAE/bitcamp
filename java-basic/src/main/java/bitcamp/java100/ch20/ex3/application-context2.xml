@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+        <bean id="e1" class="bitcamp.java100.ch20.ex3.Engine">
+        <property name="name"><value>홍길동</value></property>
+        <property name="cc"><value>3000</value></property>
+        <property name="valve"><value>16</value></property>
+        </bean>
+
+    
+</beans>
+
+
+
+
+
+
+
+
