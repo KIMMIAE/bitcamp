@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+<!-- array, list, set 다 되더라도 유지보수를 위해  
+array는 array로 list는 list로 set은 set으로 맞춰서 쓸 것. -->
+	
+	<bean id="c1" class="bitcamp.java100.ch20.ex4.Car">
+		<property name="jukebox">
+			<array>
+				<bean class="bitcamp.java100.ch20.ex4.CD" p:title="겨울비" />
+				<bean class="bitcamp.java100.ch20.ex4.CD" p:title="스프링" />
+			</array>
+		</property>
+	</bean>
+
+	<bean id="c2" class="bitcamp.java100.ch20.ex4.Car">
+		<property name="jukebox">
+			<list>
+                <bean class="bitcamp.java100.ch20.ex4.CD" p:title="겨울비" />
+                <bean class="bitcamp.java100.ch20.ex4.CD" p:title="스프링" />
+			</list>
+		</property>
+	</bean>
+
+    <bean id="c3" class="bitcamp.java100.ch20.ex4.Car">
+        <property name="jukebox">
+            <set>
+                <bean class="bitcamp.java100.ch20.ex4.CD" p:title="겨울비" />
+                <bean class="bitcamp.java100.ch20.ex4.CD" p:title="스프링" />
+            </set>
+        </property>
+    </bean>
+
+</beans>
+
+
+
+
+
+
+
