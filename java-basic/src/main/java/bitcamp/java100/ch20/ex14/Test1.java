@@ -1,4 +1,4 @@
-package bitcamp.java100.ch20.ex11;
+package bitcamp.java100.ch20.ex14;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -7,15 +7,15 @@ public class Test1 {
 	public static void main(String[] args) {
 
 		ClassPathXmlApplicationContext appCtx = new ClassPathXmlApplicationContext(
-				"bitcamp/java100/ch20/ex11/application-context1.xml");
+				"bitcamp/java100/ch20/ex14/application-context1.xml");
 
-		Car car = (Car) appCtx.getBean("c1");
-		System.out.println(car);
+		//Car car = (Car) appCtx.getBean("c1");
+		//System.out.println(car);
 
 		System.out.println("--------------------------------------");
 		String[] names = appCtx.getBeanDefinitionNames();
 		for (String name : names) {
-			System.out.println(appCtx.getBean(name));
+			System.out.printf("%s => %s\n", name, appCtx.getBean(name));
 		}
 	}
 }

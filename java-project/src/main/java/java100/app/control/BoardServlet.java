@@ -1,17 +1,26 @@
 package java100.app.control;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import java100.app.AppInitServlet;
 import java100.app.dao.BoardDao;
 import java100.app.domain.Board;
 
-@Component ("/board")
-public class BoardController implements Controller {
+@WebServlet (urlPatterns="/board/*")
+public class BoardServlet implements Servlet {
     
+	ServletConfig servletConfig;
     // BoardDao는 인터페이스이다. 
     // 따라서 BoardDao 인터페이스를 구현한 어떤 클래스라도 주입 받을 수 있다.
     // 이것이 인터페이스를 사용하는 이유이다.
@@ -19,29 +28,54 @@ public class BoardController implements Controller {
     // 현재는 App 클래스에서 MySQL DBMS를 사용하는 구현체를 주입해 주지만,
     // 만약 고객사의 DBMS가 Oracle이라면 
     // 그 Oracle을 사용하는 DAO를 주입해줄 것이다.    
-    @Autowired
     BoardDao boardDao;
+	@Override
+	public String getServletInfo() {
+		// TODO Auto-generated method stub
+		return "게시물관리 서블릿";
+	}
+
+	@Override
+	public void destroy() {
+	}
+	
+    @Override
+    public ServletConfig getServletConfig() {
+    	// TODO Auto-generated method stub
+    	return this.servletConfig;
+    }
     
     @Override
-    public void destroy() {}
+    public void init(ServletConfig config) throws ServletException {
+    	this.servletConfig = config;
+    	boardDao = AppInitServlet.IocContainer.getBean(BoardDao.class);
+    }
     
-    @Override
-    public void init() {}
 
     @Override
-    public void execute(Request request, Response response) {
-        switch (request.getMenuPath()) {
-        case "/board/list": this.doList(request, response); break;
-        case "/board/add": this.doAdd(request, response); break;
-        case "/board/view": this.doView(request, response); break;
-        case "/board/update": this.doUpdate(request, response); break;
-        case "/board/delete": this.doDelete(request, response); break;
+   	public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+           HttpServletRequest httpRequest = (HttpServletRequest) request;
+           HttpServletResponse httpResponse = (HttpServletResponse) response;
+           httpResponse.setContentType("text/plain;charset=UTF-8");
+           System.out.println("------------------------------------");
+           System.out.println(httpRequest.getServletPath());
+           System.out.println(httpRequest.getPathInfo());
+           System.out.println(httpRequest.getQueryString());
+           System.out.println(httpRequest.getRequestURI());
+           System.out.println(httpRequest.getRequestURL());
+           System.out.println("------------------------------------");
+        switch (httpRequest.getPathInfo()) {
+        case "/list": this.doList(httpRequest, httpResponse); break;
+        case "/add": this.doAdd(httpRequest, httpResponse); break;
+        case "/view": this.doView(httpRequest, httpResponse); break;
+        case "/update": this.doUpdate(httpRequest, httpResponse); break;
+        case "/delete": this.doDelete(httpRequest, httpResponse); break;
         default: 
             response.getWriter().println("해당 명령이 없습니다.");
         }
     }
     
-    private void doList(Request request, Response response) {
+    private void doList(ServletRequest request, ServletResponse response) throws ServletException, IOException {
         
         PrintWriter out = response.getWriter();
         out.println("[게시물 목록]");
@@ -64,7 +98,7 @@ public class BoardController implements Controller {
         }
     }
 
-    private void doAdd(Request request, Response response) {
+    private void doAdd(ServletRequest request, ServletResponse response) throws ServletException, IOException {
 
         PrintWriter out = response.getWriter();
         out.println("[게시물 등록]");
@@ -83,7 +117,7 @@ public class BoardController implements Controller {
         }
     } 
     
-    private void doView(Request request, Response response) {
+    private void doView(ServletRequest request, ServletResponse response) throws ServletException, IOException {
 
         PrintWriter out = response.getWriter();
         out.println("[게시물 상세 정보]");
@@ -108,7 +142,7 @@ public class BoardController implements Controller {
         }
     } 
     
-    private void doUpdate(Request request, Response response) {
+    private void doUpdate(ServletRequest request, ServletResponse response) throws ServletException, IOException {
 
         PrintWriter out = response.getWriter();
         out.println("[게시물 변경]");
@@ -131,7 +165,7 @@ public class BoardController implements Controller {
         }
     }
     
-    private void doDelete(Request request, Response response) {
+    private void doDelete(ServletRequest request, ServletResponse response) throws ServletException, IOException {
 
         PrintWriter out = response.getWriter();
         out.println("[게시물 삭제]");
