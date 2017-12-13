@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,8 +28,15 @@ public class BoardUpdateServlet extends HttpServlet {
 	        out.println("<html>");
 	        out.println("<head>");
 	        out.println("<title>게시물관리</title>");
+	        out.println("<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>");
+	        out.println("<style>");
+	        out.println(".container {");
+	        out.println("    width: 680px;");
+	        out.println("}");
+	        out.println("</style>");
 	        out.println("</head>");
 	        out.println("<body>");
+	        out.println("<div class='container'>");
 	        out.println("<h1>게시물 변경</h1>");
         
         try {
@@ -50,7 +55,8 @@ public class BoardUpdateServlet extends HttpServlet {
             e.printStackTrace(); // for developer
             out.println(e.getMessage()); // for user
         }
-        out.println("<p><a href='list'>목록</a></p>");
+        out.println("<p><a href='list' class='btn btn-primary btn-sm'>목록</a></p>");
+        out.println("</div>");
         out.println("</body>");
         out.println("</html>");
     }

@@ -29,8 +29,15 @@ public class BoardViewServlet extends HttpServlet {
 	        out.println("<html>");
 	        out.println("<head>");
 	        out.println("<title>게시물관리</title>");
+	        out.println("<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>");
+	        out.println("<style>");
+	        out.println(".container {");
+	        out.println("    width: 680px;");
+	        out.println("}");
+	        out.println("</style>");
 	        out.println("</head>");
 	        out.println("<body>");
+	        out.println("<div class='container'>");
 	        out.println("<h1>게시물 상세 정보</h1>");
 	        
         try {
@@ -39,29 +46,39 @@ public class BoardViewServlet extends HttpServlet {
             
             if (board != null) {
             	out.println("<form action='update' method='post'>");
-				out.println("<div>");
-				out.println("<label for='no'>번호</label>");
-				out.printf("<input readonly id='no' type='number' name='no' value='%d'>\n", board.getNo());
+				out.println("<div class='form-group row'>");
+				out.println("<label for='no' class='col-sm-2 col-form-label'>번호</label>");
+                out.println("<div class='col-sm-10'>");
+				out.printf("<input class='form-control' readonly id='no' type='number' name='no' value='%d'>\n", board.getNo());
 				out.println("</div>");
-				out.println("<div>");
-				out.println("<label for='title'>제목</label>");
-				out.printf("<input id='title' type='text' name='title' value='%s'>\n", board.getTitle());
 				out.println("</div>");
-				out.println("<div>");
-				out.println("<label for='content'>내용</label>");
-				out.printf("<input id='content' type='text' name='content' value='%s'>\n", board.getContent());
+				out.println("<div class='form-group row'>");
+				out.println("<label for='title' class='col-sm-2 col-form-label'>제목</label>");
+                out.println("<div class='col-sm-10'>");
+				out.printf("<input class='form-control' id='title' type='text' name='title' value='%s'>\n", board.getTitle());
 				out.println("</div>");
-				out.println("<div>");
-				out.println("<label for='regDate'>등록일</label>");
-				out.printf("<input id='regDate' type='text' name='regDate' value='%s'>\n", board.getRegDate());
 				out.println("</div>");
-				out.println("<div>");
-				out.println("<label for='viewCount'>조회수</label>");
-				out.printf("<input id='viewCount' type='text' name='viewCount' value='%s'>\n", board.getViewCount());
+				out.println("<div class='form-group row'>");
+				out.println("<label for='content' class='col-sm-2 col-form-label'>내용</label>");
+                out.println("<div class='col-sm-10'>");
+				out.printf("<input class='form-control' id='content' type='text' name='content' value='%s'>\n", board.getContent());
+				out.println("</div>");
+				out.println("</div>");
+				out.println("<div class='form-group row'>");
+				out.println("<label for='regDate' class='col-sm-2 col-form-label'>등록일</label>");
+                out.println("<div class='col-sm-10'>");
+				out.printf("<input class='form-control' id='regDate' type='text' name='regDate' value='%s'>\n", board.getRegDate());
+				out.println("</div>");
+				out.println("</div>");
+				out.println("<div class='form-group row'>");
+				out.println("<label for='viewCount' class='col-sm-2 col-form-label'>조회수</label>");
+                out.println("<div class='col-sm-10'>");
+				out.printf("<input class='form-control' id='viewCount' type='text' name='viewCount' value='%s'>\n", board.getViewCount());
+				out.println("</div>");
 				out.println("</div>");
 				
-				out.println("<button>변경</button>");
-				out.printf("<a href='delete?no=%d'>삭제</a>\n", board.getNo());
+				out.println("<button class='btn btn-primary btn-sm'>변경</button>");
+				out.printf("<a href='delete?no=%d' class='btn btn-primary btn-sm'>삭제</a>\n", board.getNo());
 				out.println("</form>");
             } else {
                 out.printf("<p>'%d'번의 게시물 정보가 없습니다.</p>\n", no);
@@ -71,6 +88,7 @@ public class BoardViewServlet extends HttpServlet {
             e.printStackTrace(); // for developer
             out.println(e.getMessage()); // for user
         }
+		out.println("</div>");
 		out.println("</body>");
 		out.println("</html>");
     } 

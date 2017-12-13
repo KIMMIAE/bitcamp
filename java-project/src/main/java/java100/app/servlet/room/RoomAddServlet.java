@@ -25,25 +25,40 @@ public class RoomAddServlet extends HttpServlet {
         out.println("<html>");
         out.println("<head>");
         out.println("<title>강의실관리</title>");
+        out.println("<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>");
+        out.println("<style>");
+        out.println(".container {");
+        out.println("    width: 680px;");
+        out.println("}");
+        out.println("</style>");
         out.println("</head>");
         out.println("<body>");
+        out.println("<div class='container'>");
         out.println("<h1>강의실 상세 정보</h1>");
         
         out.println("<form method='post'>");
-        out.println("<label for='location'>위치</label>");
-        out.println("<input id='location' type='text' name='location'>");
+        out.println("<div class='form-group row'>");
+        out.println("<label for='location' class='col-sm-2 col-form-label'>위치</label>");
+        out.println("<div class='col-sm-10'>");
+        out.println("<input class='form-control' id='location' type='text' name='location'>");
         out.println("</div>");
-        out.println("<div>");
-        out.println("<label for='이름'>이름</label>");
-        out.println("<input id='name' type='text' name='name'>");
         out.println("</div>");
-        out.println("<div>");
-        out.println("<label for='capacity'>수용인원</label>");
-        out.println("<input id='capacity' type='number' name='capacity'>");
+        out.println("<div class='form-group row'>");
+        out.println("<label for='name' class='col-sm-2 col-form-label'>이름</label>");
+        out.println("<div class='col-sm-10'>");
+        out.println("<input class='form-control' id='name' type='text' name='name'>");
         out.println("</div>");
-        out.println("<button>등록</button>");
+        out.println("</div>");
+        out.println("<div class='form-group row'>");
+        out.println("<label for='capacity' class='col-sm-2 col-form-label'>수용인원</label>");
+        out.println("<div class='col-sm-10'>");
+        out.println("<input class='form-control' id='capacity' type='number' name='capacity'>");
+        out.println("</div>");
+        out.println("</div>");
+        out.println("<button class='btn btn-primary btn-sm'>등록</button>");
         out.println("</form>");
 
+        out.println("</div>");
         out.println("</body>");
         out.println("</html>");
 	}
@@ -58,8 +73,15 @@ public class RoomAddServlet extends HttpServlet {
         out.println("<html>");
         out.println("<head>");
         out.println("<title>강의실관리</title>");
+        out.println("<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>");
+        out.println("<style>");
+        out.println(".container {");
+        out.println("    width: 680px;");
+        out.println("}");
+        out.println("</style>");
         out.println("</head>");
         out.println("<body>");
+        out.println("<div class='container'>");
         out.println("<h1>강의실 등록 결과</h1>");
 
 		try {
@@ -76,7 +98,8 @@ public class RoomAddServlet extends HttpServlet {
 			e.printStackTrace(); // for developer
 			out.println(e.getMessage()); // for user
 		}
-        out.println("<p><a href='list'>목록</a></p>");
+        out.println("<p><a href='list' class='btn btn-primary btn-sm'>목록</a></p>");
+        out.println("</div>");
         out.println("</body>");
         out.println("</html>");
 	}
