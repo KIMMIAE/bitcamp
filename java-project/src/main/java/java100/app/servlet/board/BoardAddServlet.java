@@ -3,6 +3,7 @@ package java100.app.servlet.board;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,49 +18,6 @@ import java100.app.listener.ContextLoaderListener;
 @WebServlet("/board/add")
 public class BoardAddServlet extends HttpServlet {
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		response.setContentType("text/html;charset=UTF-8");
-
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE html>");
-		out.println("<html>");
-		out.println("<head>");
-		out.println("<title>게시물관리</title>");
-        out.println("<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>");
-        out.println("<style>");
-        out.println(".container {");
-        out.println("    width: 680px;");
-        out.println("}");
-        out.println("</style>");
-		out.println("</head>");
-		out.println("<body>");
-        out.println("<div class='container'>");
-		out.println("<h1>게시물 상세 정보</h1>");
-
-		out.println("<form method='post'>");
-		out.println("<div class='form-group row'>");
-		out.println("<label for='title' class='col-sm-2 col-form-label'>제목</label>");
-        out.println("<div class='col-sm-10'>");
-		out.printf("<input class='form-control' id='title' type='text' name='title'>\n");
-		out.println("</div>");
-		out.println("</div>");
-		out.println("<div class='form-group row'>");
-		out.println("<label for='content' class='col-sm-2 col-form-label'>내용</label>");
-        out.println("<div class='col-sm-10'>");
-		out.printf("<input class='form-control' id='content' type='text' name='content'>\n");
-		out.println("</div>");
-		out.println("</div>");
-
-		out.println("<button class='btn btn-primary btn-sm'>등록</button>");
-		out.println("</form>");
-
-        out.println("</div>");
-		out.println("</body>");
-		out.println("</html>");
-
-	}
-
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardDao boardDao = ContextLoaderListener.iocContainer.getBean(BoardDao.class);
 
@@ -71,14 +29,14 @@ public class BoardAddServlet extends HttpServlet {
 		out.println("<head>");
 		out.println("<title>게시물관리</title>");
         out.println("<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>");
-        out.println("<style>");
-        out.println(".container {");
-        out.println("    width: 680px;");
-        out.println("}");
-        out.println("</style>");
-		out.println("</head>");
-		out.println("<body>");
+        out.println("<link rel='stylesheet' href='../css/common.css'>");
+        out.println("</head>");
+        out.println("<body>");
         out.println("<div class='container'>");
+        
+        RequestDispatcher rd = request.getRequestDispatcher("/header");
+        rd.include(request, response);
+        
 		out.println("<h1>게시물 등록 결과</h1>");
 		try {
 			Board board = new Board();
@@ -93,7 +51,16 @@ public class BoardAddServlet extends HttpServlet {
 			out.println(e.getMessage()); // for user
 		}
 		out.println("<p><a href='list' class='btn btn-primary btn-sm'>목록</a></p>");
-		out.println("</div>");
+        
+        rd = request.getRequestDispatcher("/footer");
+        rd.include(request, response);
+        
+        out.println("</div>");
+        
+        out.println("<script src='../node_modules/jquery/dist/jquery.slim.min.js'></script>");
+        out.println("<script src='../node_modules/popper.js/dist/umd/popper.min.js'></script>");
+        out.println("<script src='../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>");
+        
 		out.println("</body>");
 		out.println("</html>");
 	}
