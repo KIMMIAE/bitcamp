@@ -41,7 +41,7 @@
 </nav>
 </header>
 <h1>게시물 상세 정보</h1>
-<form action="add" method='post'>
+<form action="add.jsp" method='post'>
 <div class='form-group row'>
 <label for='title' class='col-sm-2 col-form-label'>제목</label>
 <div class='col-sm-10'>
@@ -60,9 +60,7 @@
     비트캠프 자바100기@2017
 </footer>
 </div>
-<script src='../node_modules/jquery/dist/jquery.slim.min.js'></script>
-<script src='../node_modules/popper.js/dist/umd/popper.min.js'></script>
-<script src='../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<%@ include file="../jslib.txt" %>
 </body>
 </html>
 
