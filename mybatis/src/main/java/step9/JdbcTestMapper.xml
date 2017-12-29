@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JdbcTestMapper">
+
+	<resultMap type="board" id="boardMap">
+
+		<id column="no" property="no" />
+
+		<!-- 컬럼명과 프로퍼티명이 같을 경우 생략 가능 -->
+		<!-- <result column="title" property="title" /> -->
+		<result column="conts" property="contents" />
+		<result column="regdt" property="createDate" />
+		<result column="vwcnt" property="viewCount" />
+	</resultMap>
+	<sql id="select1">
+		select
+		no,title,regdt,vwcnt
+	</sql>
+
+
+
+	<select id="findAll" resultMap="boardMap" parameterType="map">
+		<include refid="select1" />
+		from jdbc_test
+		<if test="words != null">
+			<where>
+				<foreach collection="words" item="word">
+					or title like '${word}%'
+
+				</foreach>
+			</where>
+		</if>
+
+		order by
+		<choose>
+			<when test="orderColumn == 'title' and align == 'desc'">
+				title desc
+			</when>
+			<when test="orderColumn == 'title' and align == 'asc'">
+				title asc
+			</when>
+			<when test="orderColumn == 'regdt' and align == 'asc'">
+				title asc
+			</when>
+			<when test="orderColumn == 'vwcnt' and align == 'desc'">
+				title desc
+			</when>
+			<when test="orderColumn == 'vwcnt' and align == 'asc'">
+				title asc
+			</when>
+			<otherwise>
+				regdt desc
+			</otherwise>
+		</choose>
+	</select>
+
+	<insert id="insert" parameterType="board">
+		insert into jdbc_test(title,conts,regdt)
+		values(#{title},#{contents},now())
+	</insert>
+
+	<update id="update" parameterType="board">
+		update jdbc_test set
+		title=#{title},
+		conts=#{contents}
+		where no=#{no}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from jdbc_test where no=#{value}
+	</delete>
+
+	<select id="findByNo" resultMap="boardMap" parameterType="int">
+		<include refid="select1" />
+		,conts
+		from jdbc_test
+		where no=#{value}
+	</select>
+</mapper>

@@ -20,10 +20,14 @@
  <servlet>
         <servlet-name>app</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 만약 ContextConfigLacation 값이 없다면,
+        DispatcherServlet은 기본 경로로 찾는다.
+        즉 /WEB-INF/(서블릿 이름)-servlet.xml 파일을 찾는다.
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>/WEB-INF/app-servlet.xml</param-value>
         </init-param>
+         -->
         <load-on-startup>1</load-on-startup>
         
         <multipart-config>

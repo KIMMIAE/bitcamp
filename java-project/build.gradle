@@ -52,6 +52,20 @@ dependencies {
    //Spring WebMVC 프레임워크
    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.2.RELEASE'
    
+   // mybatis 라이브러리
+   compile group: 'org.mybatis', name: 'mybatis', version: '3.4.5'
+   
+   // https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2
+   compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.1.1'
+   
+   //mybatis-spring
+   compile group: 'org.mybatis', name: 'mybatis-spring', version: '1.3.1'
+   
+   
+   // 스프링 JDBC 관련 라이브러리 
+   compile group: 'org.springframework', name: 'spring-jdbc', version: '5.0.2.RELEASE'
+   
+   
    
    //JavaEE의 Servlet 기술을 지원하는 라이브러리
    //"provided로 선언된 라이브러리는 컴파일 할 때 사용하고 배포할 때는 제외한다.
