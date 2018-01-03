@@ -44,14 +44,11 @@ public class DataSource {
             
         } catch (Exception e) {}
     }
+    
     synchronized public void close() {
-    	for (Connection con : list) {
-    		try {
-    			con.close();
-    		} catch (Exception e) {
-    			
-    		}
-    	}
+        for (Connection con : list) {
+            try {con.close();} catch (Exception e) {}
+        }
     }
 
     public String getDriverClassName() {
@@ -88,9 +85,6 @@ public class DataSource {
     
     
 }
-
-
-
 
 
 

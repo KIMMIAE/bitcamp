@@ -3,9 +3,19 @@
 .container {
     width: 680px;
 }
+
+
 footer {
     text-align: center;
     background-color: navy;
     color: white;
-    
 }
+
+.toolbar {
+    margin: 3px 0px;
+}
+
+.searchbox {
+    float: right;
+}
+
