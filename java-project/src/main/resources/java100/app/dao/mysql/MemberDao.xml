@@ -67,6 +67,9 @@
                 name asc
             </otherwise>
         </choose>
+        
+        limit #{startIndex}, #{size}
+        
     </select>
     
     <select id="findByNo" resultMap="memberMap" parameterType="int">
@@ -81,6 +84,11 @@
         from ex_memb
         where email=#{email} and pwd=password(#{password})
     </select>
+    
+        <select id="countAll" resultType="int">
+        select count(*) from ex_memb
+    </select>
+    
     
     <insert id="insert" parameterType="member">
         insert into ex_memb(name,email,pwd,regdt)

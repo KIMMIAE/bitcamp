@@ -43,6 +43,9 @@
                 name asc
             </otherwise>
         </choose>
+        
+        limit #{startIndex}, #{size}
+        
     </select>
     
     <select id="findByNo" resultType="score" parameterType="int">
@@ -52,6 +55,10 @@
           ,math
         from ex_score
         where no=#{value}
+    </select>
+    
+      <select id="countAll" resultType="int">
+        select count(*) from ex_score
     </select>
     
     <insert id="insert" parameterType="score">

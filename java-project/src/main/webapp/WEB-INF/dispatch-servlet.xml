@@ -89,6 +89,7 @@
       <property name="basePackage" value="java100.app.dao" />
     </bean>
     
+    <!-- 인터셉터를 등록한다. -->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
@@ -97,6 +98,9 @@
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>
+
+
+
 
 
 

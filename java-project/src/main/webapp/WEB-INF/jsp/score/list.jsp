@@ -2,7 +2,8 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,17 +34,21 @@
 </thead>
 <tbody>
 
+
 <c:forEach items="${list}" var="score">
     <tr>
         <td>${score.no}</td>
         <td><a href='${score.no}'>${score.name}</a></td>
         <td>${score.sum}</td>
         <td>${score.aver}</td>
+        <td><fmt:formatNumber value="${score.aver}" pattern=".0"/></td>
     </tr>
 </c:forEach>
 
 </tbody>
 </table>
+
+<jsp:include page="../paging.jsp"/>
 
 <jsp:include page="../footer.jsp"/>
 

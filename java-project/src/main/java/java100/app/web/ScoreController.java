@@ -9,35 +9,56 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java100.app.dao.ScoreDao;
 import java100.app.domain.Score;
+import java100.app.service.ScoreService;
 
 @Controller
 @RequestMapping("/score")
 public class ScoreController {
     
-    @Autowired ScoreDao scoreDao;
+
+	@Autowired ScoreService scoreService;
     
     @RequestMapping("list")
     public String list(
+    		@RequestParam(value="pn", defaultValue="1") int pageNo,
+    		@RequestParam(value="ps", defaultValue="5") int pageSize,
             @RequestParam(value="nm", required=false) String[] names,
             @RequestParam(value="oc", required=false) String orderColumn,
             @RequestParam(value="al", required=false) String align,
             Model model) throws Exception {
-
-        HashMap<String,Object> params = new HashMap<>();
-        params.put("names", names);
-        params.put("orderColumn", orderColumn);
-        params.put("align", align);
+    	
+    	
+    	if (pageNo < 1) {
+    		pageNo = 1;
+    	}
+    	
+    	if (pageSize < 5 || pageSize > 25) {
+    		pageSize = 5;
+    	}
+    	
+        HashMap<String,Object> options = new HashMap<>();
+        options.put("names", names);
+        options.put("orderColumn", orderColumn);
+        options.put("align", align);
         
-        model.addAttribute("list", scoreDao.findAll(params));
+        
+        int totalCount = scoreService.getTotalCount();
+        int lastPageNo = totalCount / pageSize;
+        if((totalCount % pageSize) > 0 ) {
+        	lastPageNo++;
+        }
+        
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("lastPageNo", lastPageNo);
+        model.addAttribute("list", scoreService.list(pageNo, pageSize, options));
         return "score/list";
     }
     
     @RequestMapping("{no}")
     public String view(@PathVariable int no, Model model) throws Exception {
         
-        model.addAttribute("score", scoreDao.findByNo(no));
+        model.addAttribute("score", scoreService.get(no));
         return "score/view";        
     }
 
@@ -49,21 +70,21 @@ public class ScoreController {
     @RequestMapping("add")
     public String add(Score score) throws Exception {
         
-        scoreDao.insert(score);
+        scoreService.add(score);
         return "redirect:list";
     }
     
     @RequestMapping("update")
     public String update(Score score) throws Exception {
         
-        scoreDao.update(score);
+        scoreService.update(score);
         return "redirect:list";
     }
 
     @RequestMapping("delete")
     public String delete(int no) throws Exception {
         
-        scoreDao.delete(no);
+        scoreService.delete(no);
         return "redirect:list";
     }
 }

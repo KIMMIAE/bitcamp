@@ -45,9 +45,14 @@ dependencies {
    
    //Spring IoC 컨테이너 라이브러리
    compile 'org.springframework:spring-context:5.0.2.RELEASE'
+
+   // 스프링 AOP 관련 라이브러리 aspectj weaver
+   compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.8.13'
    
     compile 'com.google.guava:guava:22.0'
     testCompile 'junit:junit:4.12'
+    
+    
 }
 
 

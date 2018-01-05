@@ -9,13 +9,16 @@
 
     <resultMap type="board" id="boardMap">
         <id column="no" property="no"/>
-        <!-- 컬럼 이름과 프로퍼티 이름이 같아서 생략! -->
-        <!--  
         <result column="title" property="title"/>
-        -->
         <result column="conts" property="content"/>
         <result column="regdt" property="regDate"/>
         <result column="vwcnt" property="viewCount"/>
+        
+        <!-- 게시글 작성자 정보를 담을 수 있도록 설정한다. -->
+        <association property="writer" javaType="member">
+            <id column="m_no" property="no"/>
+            <result column="m_name" property="name"/>
+        </association>
     </resultMap>
 
     <sql id="select1">
@@ -27,13 +30,19 @@
     </sql>
 
     <select id="findAll" resultMap="boardMap" parameterType="map">
-        <include refid="select1"/>
-        from ex_board
+        select 
+            b.no,
+            b.title,
+            b.regdt,
+            b.vwcnt,
+            m.no as m_no,
+            m.name as m_name
+        from ex_board as b join ex_memb as m on b.mno=m.no
 
-        <if test="titles != null">
+        <if test="words != null">
             <where>
-                <foreach collection="titles" item="title">
-                    or title like '%${title}%'
+                <foreach collection="words" item="word">
+                    or title like '%${word}%'
                 </foreach>
             </where>
         </if>
@@ -57,6 +66,9 @@
                 no desc
             </otherwise>
         </choose>
+        
+        <!-- 페이지징 처리 -->
+        limit #{startIndex}, #{size}
     </select>
     
     <select id="findByNo" resultMap="boardMap" parameterType="int">
@@ -66,9 +78,13 @@
         where no=#{value}
     </select>
     
+    <select id="countAll" resultType="int">
+        select count(*) from ex_board
+    </select>
+    
     <insert id="insert" parameterType="board">
-        insert into ex_board(title,conts,regdt)
-        values(#{title},#{content},now())
+        insert into ex_board(title,conts,regdt,mno)
+        values(#{title},#{content},now(),#{writer.no})
     </insert>
 
     <update id="update" parameterType="board">
@@ -90,4 +106,3 @@
     </delete>
     
 </mapper>  
-
