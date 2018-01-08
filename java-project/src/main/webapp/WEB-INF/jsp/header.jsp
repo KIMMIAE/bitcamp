@@ -6,7 +6,7 @@
 
 <header>
 <nav class='navbar navbar-expand-lg navbar-light bg-light'>
-<a class='navbar-brand' href='${contextPath}/index.html'>
+<a class='navbar-brand' href='../index.html'>
   <img src='${contextPath}/images/bootstrap-solid.svg' width='30' height='30' class='d-inline-block align-top' alt=''>
   비트캠프
 </a>
@@ -49,6 +49,9 @@
 
 </nav>
 </header>
+
+
+
 
 
 

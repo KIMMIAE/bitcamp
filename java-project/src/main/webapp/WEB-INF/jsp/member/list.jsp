@@ -18,7 +18,7 @@
 
 <h1>회원 목록</h1>
 
-<p><a href='form' class='btn btn-primary btn-sm'>추가</a></p>
+<jsp:include page="../listToolbar.jsp"/>
 
 <table class='table table-hover'>
 <thead>
