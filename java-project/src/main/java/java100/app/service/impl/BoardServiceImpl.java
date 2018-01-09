@@ -55,15 +55,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	//@Transactional //XML 설정으로 대체한다.
 	public int add(Board board) {
 		int count = boardDao.insert(board);
+		
+		this.addFiles(board.getFiles(), board.getNo());
 
-		List<UploadFile> files = board.getFiles();
-
-		for (UploadFile file : files) {
-			//file.setBoardNo(board.getNo());
-			fileDao.insert(file);
-		}
 
 		return count;
 	}
@@ -75,12 +72,8 @@ public class BoardServiceImpl implements BoardService {
 		//기존의 게시물 첨부파일을 모두 지운다.
 		fileDao.deleteAllByBoardNo(board.getNo());
 		//다시 게시물 첨부파일을 저장한다.
-		List<UploadFile> files = board.getFiles();
 
-		for (UploadFile file : files) {
-			file.setBoardNo(board.getNo());
-			fileDao.insert(file);
-		}
+		addFiles(board.getFiles(), board.getNo());
 		return count;
 	}
 
@@ -89,6 +82,15 @@ public class BoardServiceImpl implements BoardService {
 		//fileDao.deleteAllByBoardNo(no);
 		
 		return boardDao.delete(no);
+	}
+	
+	@Override
+	//@Transactional //XML 설정으로 대체
+	public void addFiles(List<UploadFile> files, int boardNo ) {
+		for (UploadFile file : files) {
+			//file.setBoardNo(boardNo);
+			fileDao.insert(file);
+		}
 	}
 
 }

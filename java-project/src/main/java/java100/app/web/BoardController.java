@@ -80,7 +80,9 @@ public class BoardController {
 		return "board/form";
 
 	}
-
+	
+	//XML 설정으로 트랜잭션을 조정한다면 @Transactional 애노테이션은 필요없다.
+	//@Transactional
 	@RequestMapping("add")
 	public String add(Board board,
 			MultipartFile[] file,
@@ -100,9 +102,13 @@ public class BoardController {
 
 		}
 		board.setFiles(uploadFiles);
-
+		
+		//게시글 작성자는 로그인 사용자이다.
 		board.setWriter(loginUser);
+		
+		//게시글 등록
 		boardService.add(board);
+		
 
 		return "redirect:list";
 	}
