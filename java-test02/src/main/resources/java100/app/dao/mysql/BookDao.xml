@@ -9,18 +9,44 @@
 
     <resultMap type="book" id="bookMap">
         <id column="no" property="no"/>
-        <result column="titl" property="title"/>
+        <result column="title" property="title"/>
         <result column="dcrt" property="description"/>
-        <result column="pric" property="price"/>
-        <result column="pres" property="press"/>
-        <result column="phot" property="photo"/>
+        <result column="price" property="price"/>
+        <result column="press" property="press"/>
         <result column="pubdt" property="publishedDate"/>
     </resultMap>
+    
+        <sql id="select1">
+        select
+        no,
+        title,
+        press,
+        price
+    </sql>
 
     <insert id="insert" parameterType="book">
-        insert into ex_book(titl,dcrt,pric,pres,phot,pubdt)
-        values(#{title},#{description},#{price},#{press},#{photo},now())
+        insert into ex_book(title,dcrt,price,press,pubdt)
+        values(#{title},#{description},#{price},#{press},#{publishedDate})
     </insert>
+    
+    <select id="findAll" resultMap="bookMap" parameterType="map">
+        select
+        no,
+        title,
+        press,
+        price
+        from ex_book
+
+    </select>
+    
+        <select id="findByNo2" resultMap="bookMap" parameterType="int">
+        <include refid="select1" />
+        ,dcrt
+        ,pubdt
+        from ex_book
+        where no=#{value}
+    </select>
+    
     
 </mapper>  
 

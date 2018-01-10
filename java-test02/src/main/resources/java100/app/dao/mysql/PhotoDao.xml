@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DAO 객체를 자동으로 생성하려면, namespace의 값이 인터페이스 이름과 같아야 한다. -->
+<mapper namespace="java100.app.dao.PhotoDao">
+
+
+    <select id="findByBoardNo" resultType="uploadPhoto" parameterType="int">
+        select no, photo
+        from ex_photo
+        where bkno=${value}
+    </select>
+
+	<insert id="insert" parameterType="uploadPhoto">
+		insert into ex_photo(photo, bkno)
+		values(#{Photoname}, #{bookNo})
+	</insert>
+	<delete id="deleteAllByBoardNo" parameterType="int">
+	delete from ex_photo
+	where bkno=#{value}
+	</delete>
+	
+
+</mapper>  
+
+
