@@ -1,27 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>jQuery Mobile</title>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+<title>jQuery Mobile</title>
+<link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- 
+<script
+	src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+ -->
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"
+	integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
+	crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
-    <div data-role="page">
-        <div data-role="header" data-theme="b">
-            <h1>HTML5</h1>
-        </div>
-        <div data-role="content">
-            <ul data-role="listview">
-                <li data-role="list-divider">HTML5</li>
-                <li>Multimedia</li>
-                <li>Connectivity</li>
-                <li>Device Access</li>
-                <li data-role="list-divider">CSS3</li>
-                <li>Animation</li>
-                <li>3D Transform</li>
-            </ul>
-        </div>
-    </div>
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>HTML5</h1>
+		</div>
+		<div data-role="content">
+			<input>
+			<ul data-role="listview">
+				<li data-role="list-divider">HTML5</li>
+				<li>Multimedia</li>
+				<li>Connectivity</li>
+				<li>Device Access</li>
+				<li data-role="list-divider">CSS3</li>
+				<li>Animation</li>
+				<li>3D Transform</li>
+			</ul>
+		</div>
+	</div>
+	<script>
+	  $( "#date1" ).datepicker();
+	</script>
 </body>
 </html>

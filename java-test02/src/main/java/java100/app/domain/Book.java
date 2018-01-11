@@ -1,6 +1,7 @@
 package java100.app.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 //도서명, 출판사, 출판일, 가격, 설명, 사진
 public class Book {
@@ -10,9 +11,8 @@ public class Book {
     String description;
     int price;
     String press;
-    String photo;
     Date publishedDate;
-    
+    List<UploadPhoto> photo;
     
 	public int getNo() {
 		return no;
@@ -44,18 +44,19 @@ public class Book {
 	public void setPress(String press) {
 		this.press = press;
 	}
-	public String getPhoto() {
-		return photo;
-	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
 	public Date getPublishedDate() {
 		return publishedDate;
 	}
 	public void setPublishedDate(Date publishedDate) {
 		this.publishedDate = publishedDate;
 	}
+	public List<UploadPhoto> getPhoto() {
+		return photo;
+	}
+	public void setPhoto(List<UploadPhoto> photo) {
+		this.photo = photo;
+	}
     
+ 
     
 }

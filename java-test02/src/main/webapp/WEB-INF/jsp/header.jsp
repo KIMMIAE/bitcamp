@@ -18,16 +18,7 @@
 <div class='collapse navbar-collapse' id='navbarNav'>
 <ul class='navbar-nav mr-auto'>
   <li class='nav-item'>
-    <a class='nav-link' href='../score/list'>도서등록</a>
-  </li>
-  <li class='nav-item'>
-    <a class='nav-link' href='../member/list'>도서정보</a>
-  </li>
-  <li class='nav-item'>
-    <a class='nav-link' href='../board/list'>도서상세정보</a>
-  </li>
-  <li class='nav-item'>
-    <a class='nav-link' href='../room/list'>변경</a>
+    <a class='nav-link' href='../book/list'>도서정보</a>
   </li>
 </ul>
 

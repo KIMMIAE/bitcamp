@@ -3,8 +3,10 @@
 <head>
     <title>CSS3 Selector Basic Page</title>
     <style>
-        p { counter-increment: rint; }
-        p::before { content: counter(rint) "."; }
+        p {
+        border: 1px solid red;
+         counter-increment: pno; }
+        p::before { content: counter(pno) "."; }
         p::after { content: " - " attr(data-page) " page"; }
         p::first-letter { font-size: 3em; }
     </style>

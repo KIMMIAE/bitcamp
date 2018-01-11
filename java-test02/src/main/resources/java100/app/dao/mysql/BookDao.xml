@@ -47,6 +47,19 @@
         where no=#{value}
     </select>
     
+        <update id="update" parameterType="book">
+        update ex_book set 
+            title=#{title}, 
+            press=#{press},
+            price=#{price},
+            dcrt=#{description}
+        where no=#{no}
+    </update>
+    
+        <delete id="delete" parameterType="int">
+        delete from ex_book
+        where no=#{value}
+    </delete>
     
 </mapper>  
 

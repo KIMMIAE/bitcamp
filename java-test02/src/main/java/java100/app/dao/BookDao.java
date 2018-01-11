@@ -10,7 +10,9 @@ public interface BookDao {
 	List<Book> findAll(HashMap<String, Object> params);
 	Book findByNo2(int no);
 	int insert(Book book);
-	int updateViewCount(int no);
+	int update(Book book);
+	int delete(int no);
+
 	
 
 
