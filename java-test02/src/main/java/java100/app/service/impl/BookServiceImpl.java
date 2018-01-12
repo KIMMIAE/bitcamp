@@ -7,18 +7,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java100.app.dao.BookDao;
+import java100.app.dao.PhotoDao;
 import java100.app.domain.Book;
+import java100.app.domain.UploadPhoto;
 import java100.app.service.BookService;
 
 @Service
 public class BookServiceImpl implements BookService {
 
     @Autowired BookDao bookDao;
+    @Autowired PhotoDao photoDao;
+    
     
     @Override
     public int add(Book book) {
-        return bookDao.insert(book);
+        // insert를 하기 전에는 board의 no 프로퍼티 값은 0이다.
+        // insert를 한 후에는 no 프로퍼티에 DB에서 생성한 값이 저장된다.
+        int count = bookDao.insert(book);
+        // 첨부파일 등록
+        this.addFiles(book.getPhotos(), book.getNo());
+        
+        return count;
     }
+
+
+
+    @Override
+	public void addFiles(List<UploadPhoto> photos, int bookNo) {
+    	 for (UploadPhoto photo : photos) {
+             // 파일 정보를 insert 하기 전에 게실물 no를 설정한다.
+             photo.setBookNo(bookNo);
+             photoDao.insert(photo);
+         }
+		
+	}
 
 
 

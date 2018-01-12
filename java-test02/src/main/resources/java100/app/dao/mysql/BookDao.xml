@@ -3,64 +3,68 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- DAO 객체를 자동으로 생성하려면,
-     namespace의 값이 인터페이스 이름과 같아야 한다. -->
+<!-- DAO 객체를 자동으로 생성하려면, namespace의 값이 인터페이스 이름과 같아야 한다. -->
 <mapper namespace="java100.app.dao.BookDao">
 
-    <resultMap type="book" id="bookMap">
-        <id column="no" property="no"/>
-        <result column="title" property="title"/>
-        <result column="dcrt" property="description"/>
-        <result column="price" property="price"/>
-        <result column="press" property="press"/>
-        <result column="pubdt" property="publishedDate"/>
-    </resultMap>
-    
-        <sql id="select1">
-        select
-        no,
-        title,
-        press,
-        price
-    </sql>
+	<resultMap type="book" id="bookMap">
+		<id column="no" property="no" />
+		<result column="title" property="title" />
+		<result column="dcrt" property="description" />
+		<result column="price" property="price" />
+		<result column="press" property="press" />
+		<result column="pubdt" property="publishedDate" />
 
-    <insert id="insert" parameterType="book">
-        insert into ex_book(title,dcrt,price,press,pubdt)
-        values(#{title},#{description},#{price},#{press},#{publishedDate})
-    </insert>
-    
-    <select id="findAll" resultMap="bookMap" parameterType="map">
-        select
-        no,
-        title,
-        press,
-        price
-        from ex_book
+		<collection property="photos" ofType="uploadPhoto">
+			<id column="p_no" property="no" />
+			<result column="photoname" property="photoname" />
+		</collection>
+	</resultMap>
 
-    </select>
-    
-        <select id="findByNo2" resultMap="bookMap" parameterType="int">
-        <include refid="select1" />
-        ,dcrt
-        ,pubdt
-        from ex_book
-        where no=#{value}
-    </select>
-    
-        <update id="update" parameterType="book">
-        update ex_book set 
-            title=#{title}, 
-            press=#{press},
-            price=#{price},
-            dcrt=#{description}
-        where no=#{no}
-    </update>
-    
-        <delete id="delete" parameterType="int">
-        delete from ex_book
-        where no=#{value}
-    </delete>
-    
+	<sql id="select1">
+		select
+		no,
+		title,
+		press,
+		price
+	</sql>
+
+	<insert id="insert" parameterType="book" useGeneratedKeys="true" keyColumn="no" keyProperty="no">
+		insert into ex_book(title,dcrt,price,press,pubdt)
+		values(#{title},#{description},#{price},#{press},#{publishedDate})
+	</insert>
+
+	<select id="findAll" resultMap="bookMap" parameterType="map">
+		select
+		no,
+		title,
+		press,
+		price
+		from ex_book
+
+	</select>
+
+	<select id="findByNo2" resultMap="bookMap" parameterType="int">
+		<include refid="select1" />
+		,dcrt
+		,pubdt
+		from ex_book
+		where no=#{value}
+	</select>
+
+	<update id="update" parameterType="book">
+		update ex_book set
+		title=#{title},
+		press=#{press},
+		price=#{price},
+		dcrt=#{description}
+		where no=#{no}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from ex_book
+		where no=#{value}
+	</delete>
+
 </mapper>  
 
 

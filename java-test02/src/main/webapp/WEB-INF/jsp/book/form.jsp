@@ -56,7 +56,7 @@
 <div class='form-group row'>
 <label for='file' class='col-sm-2 col-form-label'>사진</label>
 <div class='col-sm-10'>
-<input type="file" class="form-control-file" id="file" name="file">
+<input type="file" class="form-control-file" id="file" name="photo">
 </div>
 </div>
 

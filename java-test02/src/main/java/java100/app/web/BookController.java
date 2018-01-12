@@ -63,7 +63,7 @@ public class BookController {
     @RequestMapping("add")
     public String add(
     		Book book,
-    		 MultipartFile[] file) throws Exception {
+    		 MultipartFile[] photo) throws Exception {
     	   // 업로드 파일을 저장할 폴더 위치를 가져온다.
         String uploadDir = servletContext.getRealPath("/download");
 
@@ -72,7 +72,7 @@ public class BookController {
         
         // 클라이언트가 보낸 파일을 저장하고, 
         // 그 파일명(저장할 때 사용한 파일명)을 목록에 추가한다.
-        for (MultipartFile part : file) {
+        for (MultipartFile part : photo) {
             if (part.isEmpty())
                 continue;
             
@@ -82,7 +82,7 @@ public class BookController {
         }
         
         // Board 객체에 저장한 파일명을 등록한다. 
-        book.setPhoto(uploadPhoto);
+        book.setPhotos(uploadPhoto);
 
         bookService.add(book);
         return "redirect:list";
@@ -155,10 +155,5 @@ public class BookController {
 	            return "";
 	        
 	        return photoname.substring(dotPosition);
-	        
-	        
 	}
-
-
-    
 }

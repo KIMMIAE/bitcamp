@@ -66,7 +66,7 @@
         <div class='form-group row'>
         <label class='col-sm-2 col-form-label'>사진</label>
         <div class='col-sm-10'>
-        <c:forEach items="${book.photo}" var="file">
+        <c:forEach items="${book.photos}" var="file">
         <a href="${contextPath}/download/${photo.photo}">${photo.photo}</a><br>
         </c:forEach>
         </div>

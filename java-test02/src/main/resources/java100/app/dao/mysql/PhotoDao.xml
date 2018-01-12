@@ -8,15 +8,16 @@
 
 
     <select id="findByBoardNo" resultType="uploadPhoto" parameterType="int">
-        select no, photo
+        select no, photoname
         from ex_photo
         where bkno=${value}
     </select>
 
 	<insert id="insert" parameterType="uploadPhoto">
-		insert into ex_photo(photo, bkno)
-		values(#{Photoname}, #{bookNo})
+		insert into ex_photo(photoname, bkno)
+		values(#{photoname}, #{bookNo})
 	</insert>
+	
 	<delete id="deleteAllByBoardNo" parameterType="int">
 	delete from ex_photo
 	where bkno=#{value}

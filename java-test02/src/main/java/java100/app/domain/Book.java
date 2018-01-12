@@ -12,8 +12,13 @@ public class Book {
     int price;
     String press;
     Date publishedDate;
-    List<UploadPhoto> photo;
+    List<UploadPhoto> photos;
     
+	@Override
+	public String toString() {
+		return "Book [no=" + no + ", title=" + title + ", description=" + description + ", price=" + price + ", press="
+				+ press + ", publishedDate=" + publishedDate + ", photos=" + photos + "]";
+	}
 	public int getNo() {
 		return no;
 	}
@@ -50,13 +55,13 @@ public class Book {
 	public void setPublishedDate(Date publishedDate) {
 		this.publishedDate = publishedDate;
 	}
-	public List<UploadPhoto> getPhoto() {
-		return photo;
+	public List<UploadPhoto> getPhotos() {
+		return photos;
 	}
-	public void setPhoto(List<UploadPhoto> photo) {
-		this.photo = photo;
+	public void setPhotos(List<UploadPhoto> photos) {
+		this.photos = photos;
 	}
     
- 
+
     
 }
