@@ -26,6 +26,18 @@
                 name='no' value='${book.no}'>
         </div>
         </div>
+
+        <div class='form-group row'>
+        <label class='col-sm-2 col-form-label'>사진</label>
+        <div class='col-sm-10'>
+        <c:forEach items="${book.photos}" var="file">
+         <img src='${contextPath}/download/${photoname}' width='30' 
+         height='30' class='d-inline-block align-top' alt=''>${photo.photoname}
+        <br>
+        </c:forEach>
+        </div>
+        </div>
+        
         <div class='form-group row'>
         <label for='title' class='col-sm-2 col-form-label'>도서명</label>
         <div class='col-sm-10'>
@@ -63,14 +75,6 @@
         </div>
         </div>
         
-        <div class='form-group row'>
-        <label class='col-sm-2 col-form-label'>사진</label>
-        <div class='col-sm-10'>
-        <c:forEach items="${book.photos}" var="file">
-        <a href="${contextPath}/download/${photo.photo}">${photo.photo}</a><br>
-        </c:forEach>
-        </div>
-        </div>
         
         <div class='form-group row'>
         <div class='col-sm-10'>

@@ -23,7 +23,7 @@
 <table class='table table-hover'>
 <thead>
 <tr>
-<th>도서사진</th><th>도서명</th><th>출판사</th><th>가격</th>
+<th>도서번호</th><th>도서사진</th><th>도서명</th><th>출판사</th><th>가격</th>
 </tr>
 </thead>
 <tbody>
@@ -32,6 +32,7 @@
 
         <tr>
         <td>${book.no}</td>
+        <td><img src="${contextPath}/download/${photoname}" width="33" height="40" border="0" alt=""></td>
         <td><a href='${book.no}'>${book.title}</a></td>
         <td>${book.press}</td>
         <td>${book.price}</td>

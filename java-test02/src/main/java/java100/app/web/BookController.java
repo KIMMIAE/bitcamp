@@ -31,7 +31,9 @@ public class BookController {
             @RequestParam(value="words", required=false) String[] words,
             @RequestParam(value="oc", required=false) String orderColumn,
             @RequestParam(value="al", required=false) String align,
-            Model model) throws Exception {
+            Model model,
+            Book book,
+            MultipartFile[] photo) throws Exception {
 
         // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
         //
