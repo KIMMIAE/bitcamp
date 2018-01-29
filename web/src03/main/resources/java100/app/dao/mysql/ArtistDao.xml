@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DAO 객체를 자동으로 생성하려면,
+     namespace의 값이 인터페이스 이름과 같아야 한다. -->
+<mapper namespace="java100.app.dao.ArtistDao">
+
+<!-- 
+    <resultMap type="member" id="memberMap">
+        <id column="mmbno" property="no"/>
+        <result column="nicknm" property="nickname"/>
+        <result column="msgfl" property="messageFlag"/>
+        <result column="msgid" property="messageId"/>
+        <result column="cancelfl" property="cancleFlag"/>
+        <result column="type" property="type"/>
+        <result column="pwd" property="password"/>
+        <result column="regdt" property="regDate"/>
+    </resultMap>
+
+
+    <sql id="select1">
+        select 
+            mmbno,
+            nicknm,
+            email,
+            type,
+            msgfl,
+            msgid,
+            cancelfl,
+            regdt
+    </sql>
+
+ -->
+    
+    <insert id="insert" parameterType="artist">
+        insert into tb_artist(artnm,artmmb,profile,joindt)
+        values(#{artistName},#{artistMember},#{profile},now())
+    </insert>
+<!-- 
+    <update id="update" parameterType="member">
+        update tb_memb set 
+            nicknm=#{nickname},
+            email=#{email},
+            type=#{type},
+            msgfl=#{messageFlag},
+            msgid=#{messageId},
+            cancelfl=#{cancleFlag},
+            pwd=password(#{password})
+        where mmbno=#{no}
+    </update>
+
+
+    <delete id="delete" parameterType="int">
+        delete from tb_memb
+        where mmbno=#{value}
+    </delete>
+
+ -->
+    
+</mapper>  
+
+
+
+
+
+
+
+
+
