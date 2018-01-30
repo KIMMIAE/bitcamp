@@ -2,14 +2,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>졸려어</title>
-<script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
+<title>Insert title here</title>
 </head>
-<body><button id="btn1">눌러라~~</button>
-<h1>안녕하세용!</h1>
+<body>
+<script type="text/javascript" src="test04.min.js"></script>
+
 <script type="text/javascript">
-$('#btn1').on('click', function() {
-    window.alert("오호라!")
-});
+window.plus(10);
+plus(20); // window에 소속된 변수나 함수를 사용할 때는 window. 을 생략 할 수 있다.
+minus(3);
+window.alert(result);
 </script>
+
 </body>
+</html>
+

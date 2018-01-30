@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>졸려어</title>
+</head>
+<body>
+<h1 id="time"></h1>
+
+<script type="text/javascript">
+window.setTimeout(function() {
+    window.alert("오호라~ 시간이 되었네요.")
+    //window.location.href="http://www.daum.net";
+}, 5000);
+
+window.setInterval(function() {
+    //console.log("ㅋㅋㅋ")
+    var tag = window.document.getElementById("time");
+    var today = new Date();
+    tag.innerHTML = today.getFullYear() + "-" + 
+                    (today.getMonth() + 1) + "-" +
+                    today.getDate() + " " + 
+                    today.getHours() + ":" + 
+                    today.getMinutes() + ":" +
+                    today.getSeconds();
+}, 1000);
+</script>
+</body>
+</html>
