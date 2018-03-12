@@ -2,8 +2,7 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +56,7 @@
         <div class='form-group row'>
         <div class='col-sm-10'>
         <button class='btn btn-primary btn-sm'>변경</button>
-        <a href='delete?no=${member.no}' class='btn btn-danger btn-sm'>삭제</a>
+        <a href='delete?no=${member.no}' class='btn btn-primary btn-sm'>삭제</a>
         </div>
         </div>
         </form>

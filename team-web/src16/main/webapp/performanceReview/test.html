@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>공연 후기</title>
+<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel="stylesheet" type="text/css" href="/css/reviewList.css">
+<link rel='stylesheet' href='../css/style1.css'>
+</head>
+
+
+<body>
+    <div class='container'>
+        <header></header>
+
+        <h2>공연 후기</h2>
+
+        <nav class="navbar navbar-light justify-content-between">
+            <a href='form.html' class='btn btn-primary btn-sm'>추가</a>
+            <form class="form-inline">
+                <input id="reviewWords" name="reviewWords"
+                    class="form-control form-control-sm mr-sm-2" type="search"
+                    placeholder="검색" aria-label="Search">
+                <button id="reviewSearchBtn"
+                    class="btn btn-sm btn-outline-success my-2 my-sm-0" type="button">Search</button>
+            </form>
+        </nav>
+                <section>
+<div class="items">
+                <figure>
+                    <figcaption>
+                    </figcaption>
+                </figure>
+            </div>
+            
+            <output></output>
+        </section>
+        
+        
+        <table id="reviewList" class='table table-hover'>
+            <thead>
+                <tr id="b">
+                </tr>
+            </thead>
+
+            <tbody id='reviewTbody'></tbody>
+        </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a id="reviewPrevBtn" class="page-link"
+                    tabindex="-1">이전</a></li>
+
+                <li class="page-item"><a id="reviewCurrBtn" class="page-link"
+                    href="#">1</a></li>
+
+                <li class="page-item "><a id="reviewNextBtn" class="page-link"
+                    tabindex="0">다음</a></li>
+            </ul>
+        </nav>
+
+    </div>
+
+<script src='../node_modules/jquery/dist/jquery.min.js'></script>
+<script src='../node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script type="text/javascript">
+
+var reviewWords = $('#reviewWords'),
+    reviewSearchBtn = $('#reviewSearchBtn'),
+    reviewPrevBtn = $('#reviewPrevBtn'),
+    reviewCurrBtn = $('#reviewCurrBtn'),
+    reviewNextBtn = $('#reviewNextBtn'),
+    reviewTbody = $('#reviewList > #reviewTbody'),
+    output = $('#reviewList > output'),
+    reviewCurrPageNo = 1;
+    
+    $('header').load('../header.html', () => {
+        /* reviewLoad(1); */
+        testLoad(1);
+    });
+
+    $('footer').load('../footer.html');
+
+
+
+    reviewSearchBtn.click(() => {
+        //event.preventDefault();
+        reviewLoad(1, {
+            "reviewWords": $('#reviewWords').val()
+        })
+    });
+
+    reviewPrevBtn.click(() => {
+        reviewLoad(reviewCurrPageNo - 1)
+    });
+
+    reviewNextBtn.click(() => {
+        reviewLoad(reviewCurrPageNo + 1)
+    });
+
+    function testLoad(reviewOptions) {
+
+        if (reviewOptions == undefined) reviewOptions = {};
+
+        $.ajax('../json/performanceReview/list', {
+            /*method: 'GET',*/
+            data: reviewOptions,
+            dataType: 'json',
+            success: (reviewResult) => {
+                
+                output.html(""); // <tbody> 콘텐츠를 지운다.
+                var reviewFilename;
+                for (var reviewData of reviewResult.reviewList) {
+                    for (var reviewMedia of reviewData.reviewFiles) {
+                        if (reviewMedia.reviewFilename == null) {
+                            reviewFilename = 'no_img.jpg';
+                        }else {
+                            reviewFilename = reviewMedia.reviewFilename;
+                        }
+                    }
+                    $('<figure>')
+                        .html(  
+                            "<a href='form.html?no=" + reviewData.reviewNo + "'>" +
+                            "<img src='../download/" + reviewFilename + "' height=300>" + 
+                            "<figcaption>" + reviewData.reviewDescription + "</figcaption></a>")
+                        .appendTo(output);
+                }
+            },
+            error: () => {
+                window.alert('서버 실행 오류!');
+            }
+        });
+    }
+    
+    
+  
+function reviewLoad(reviewPageNo, reviewOptions) {
+
+if (reviewOptions == undefined) reviewOptions = {};
+reviewOptions.reviewPn = reviewPageNo;
+
+$.ajax('../json/performanceReview/list', {
+    /*method: 'GET',*/
+    data: reviewOptions,
+    dataType: 'json',
+    success: (reviewResult) => {
+        
+        reviewTbody.html(""); // <tbody> 콘텐츠를 지운다.
+        var reviewFilename;
+        for (var reviewData of reviewResult.reviewList) {
+            for (var reviewMedia of reviewData.reviewFiles) {
+                if (reviewMedia.reviewFilename == null) {
+                    reviewFilename = 'no_img.jpg';
+                }else {
+                    reviewFilename = reviewMedia.reviewFilename;
+                }
+            }
+            $('<tr id="b">')
+                .html(  
+                    "<td>" + reviewData.reviewDescription + "</td>" +
+                    "<td><a href='form.html?no=" + reviewData.reviewNo + "'>" +
+                    "<img src='../download/" + reviewFilename + "' height=300>" + 
+                    "</a></td>")
+                .appendTo(reviewTbody);
+        }
+        
+        reviewCurrPageNo = reviewResult.reviewPageNo;
+        reviewCurrBtn.html(reviewCurrPageNo);
+        
+        if (reviewResult.reviewPageNo == 1) {
+            $(reviewPrevBtn.parent()).addClass("disabled");
+        } else {
+            $(reviewPrevBtn.parent()).removeClass("disabled");
+        }
+        
+        if (reviewResult.reviewLastPageNo == reviewResult.reviewPageNo) {
+            $(reviewNextBtn.parent()).addClass("disabled");
+        } else {
+            $(reviewNextBtn.parent()).removeClass("disabled");
+        }
+    },
+    error: () => {
+        window.alert('서버 실행 오류!');
+    }
+});
+
+function formatDate(json) {
+    var jasondate = new Date(json) 
+
+    return jasondate.getFullYear() + '년 ' + 
+      (jasondate.getMonth() + 1) + '월 ' + 
+      jasondate.getDate() + '일 '  
+    }
+
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -19,8 +19,13 @@ public interface BoardService {
     List<Board> list(int pageNo, int pageSize, Map<String,Object> options);
     Board get(int no);
     int getTotalCount();
-    int add(Board board);
-    int update(Board board);
+    int add(Board score);
+    int update(Board score);
     int delete(int no);
     void addFiles(List<UploadFile> files, int boardNo);
 }
+
+
+
+
+

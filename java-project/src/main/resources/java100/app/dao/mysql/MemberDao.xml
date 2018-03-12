@@ -31,18 +31,18 @@
         from ex_memb    
 
         <if test="words != null">
-            <where>
-                name in 
+	        <where>
+	            name in 
+	            <foreach collection="words" item="word" 
+	                     open="(" close=")" separator=",">
+	                #{word}
+	            </foreach>
+	            or email in 
                 <foreach collection="words" item="word" 
                          open="(" close=")" separator=",">
                     #{word}
                 </foreach>
-                or email in 
-                <foreach collection="words" item="word" 
-                         open="(" close=")" separator=",">
-                    #{word}
-                </foreach>
-            </where>
+	        </where>
         </if>
         
         <!-- 정렬 조건에 따라 SQL문을 변경한다.-->
@@ -68,8 +68,8 @@
             </otherwise>
         </choose>
         
+        <!-- 페이지징 처리 -->
         limit #{startIndex}, #{size}
-        
     </select>
     
     <select id="findByNo" resultMap="memberMap" parameterType="int">
@@ -85,12 +85,19 @@
         where email=#{email} and pwd=password(#{password})
     </select>
     
-        <select id="countAll" resultType="int">
+    <select id="findByEmail" 
+            resultMap="memberMap" parameterType="string">
+        <include refid="select1"/>
+        from ex_memb
+        where email=#{email}
+    </select>
+    
+    <select id="countAll" resultType="int">
         select count(*) from ex_memb
     </select>
     
-    
-    <insert id="insert" parameterType="member">
+    <insert id="insert" parameterType="member" 
+            useGeneratedKeys="true" keyColumn="no" keyProperty="no">
         insert into ex_memb(name,email,pwd,regdt)
         values(#{name},#{email},password(#{password}),now())
     </insert>
@@ -109,6 +116,8 @@
     </delete>
     
 </mapper>  
+
+
 
 
 

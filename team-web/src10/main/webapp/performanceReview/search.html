@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>공연 정보 찾기</title>
+<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='../css/style1.css'>
+</head>
+<body>
+    <div class='container'>
+
+
+
+        <h2>공연 검색</h2>
+        
+
+        <nav class="navbar navbar-light justify-content-between">
+            <form class="form-inline">
+                <input id="words" name="words"
+                    class="form-control form-control-sm mr-sm-2" type="search"
+                    placeholder="검색" aria-label="Search">
+                <button id="searchBtn"
+                    class="btn btn-sm btn-outline-success my-2 my-sm-0" type="button">Search</button>
+            </form>
+        </nav>
+
+        <table id="list" class='table table-hover'>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>공연명</th>
+                    <th>아티스트명</th>
+                    <th>공연장소</th>
+                    <th>공연날짜</th>
+                </tr>
+            </thead>
+
+            <tbody></tbody>
+        </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a id="prevBtn" class="page-link"
+                    tabindex="-1">이전</a></li>
+
+                <li class="page-item"><a id="currBtn" class="page-link"
+                    href="#">1</a></li>
+
+                <li class="page-item "><a id="nextBtn" class="page-link"
+                    tabindex="0">다음</a></li>
+            </ul>
+        </nav>
+
+
+    </div>
+
+    <script src='../node_modules/jquery/dist/jquery.min.js'></script>
+    <script src='../node_modules/popper.js/dist/umd/popper.min.js'></script>
+    <script src='../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+
+    <script type="text/javascript">
+
+var words = $('#words'),
+    searchBtn = $('#searchBtn'),
+    prevBtn = $('#prevBtn'),
+    currBtn = $('#currBtn'),
+    nextBtn = $('#nextBtn'),
+    tbody = $('#list > tbody'),
+    currPageNo = 1;
+
+    searchBtn.click(() => {
+        //event.preventDefault();
+        load(1, {
+            "words": $('#words').val()
+        })
+    });
+
+    prevBtn.click (() => {
+        load(currPageNo - 1)
+    });
+
+    nextBtn.click (() => {
+        load(currPageNo + 1)
+    });
+
+    function load(pageNo, options) {
+        
+        if (options == undefined) options = {};
+        options.pn = pageNo;
+        
+        
+        
+        $.ajax('../json/performance/list', {
+            /*method: 'GET',*/
+            data: options,
+            dataType: 'json',
+            success: (result) => {
+                
+                tbody.html("");
+                
+                //loginUser = result.loginUser;
+                
+                var filename;
+                for (var data of result.list) {
+                    for(var media of data.medias) {
+                        if (media.filename == null) {
+                            filename = 'no_img.jpg';
+                        } else {
+                            filename = media.filename;
+                        }
+                    }
+                    $('<tr>').
+                        html(
+                            "<td>" + data.no + "</td>" +
+                            "<td><a href='form.html?no=" + data.no + "'>" + 
+                                "<img src='../download/" + filename + "' height=50>" + 
+                                "<div>" + data.name + "</a></td>" +
+                            "<td>" + data.artist.artistName + "</td>" +
+                            "<td>" + data.location + "</td>" +
+                            "<td>" + formatDate(data.entryDate) + "</td>")
+                        .appendTo(tbody);
+                }
+                
+                currPageNo = result.pageNo;
+                currBtn.html(currPageNo);
+                
+                if (result.pageNo == 1) {
+                    $(prevBtn.parent()).addClass("disabled");
+                } else {
+                    $(prevBtn.parent()).removeClass("disabled");
+                }
+                
+                if (result.lastPageNo == result.pageNo) {
+                    $(nextBtn.parent()).addClass("disabled");
+                } else { 
+                    $(nextBtn.parent()).removeClass("disabled");
+                }
+            },
+            error: () => {
+                window.alert('서버 실행 오류!');
+            }
+        });
+    }
+
+    function formatDate(jason) {
+        var jasondate = new Date(jason) 
+
+        return jasondate.getFullYear() + '년 ' + 
+          (jasondate.getMonth() + 1) + '월 ' + 
+          jasondate.getDate() + '일 '  
+    }
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

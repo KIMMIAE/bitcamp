@@ -1,17 +1,27 @@
 package java100.app;
 
+import java.util.HashMap;
+
+import org.springframework.web.client.RestTemplate;
+
+
 public class Test {
 
     public static void main(String[] args) {
-        String[] path = 
-                "/score/add?name=aaa&kor=100&eng=100".split("\\?");
+        HashMap<String,String> parameters = new HashMap<>();
+        parameters.put("name", "홍길동");
+        parameters.put("age", "20");
         
-        String[] arr = path[1].split("&");
-        for (String param : arr) {
-            String[] kv = param.split("=");
-            System.out.printf("%s : %s\n", kv[0], kv[1]);
-        }
-
+        RestTemplate template = new RestTemplate();
+        String result = template.getForObject("https://www.eomcs.com/", String.class, parameters);
+        System.out.println("---------------------------------");
+        System.out.println(result);
     }
 
 }
+
+
+
+
+
+

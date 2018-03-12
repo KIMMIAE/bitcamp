@@ -21,7 +21,7 @@ public class RoomController {
     public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
-            @RequestParam(value="word", required=false) String[] words,
+            @RequestParam(value="words", required=false) String[] words,
             @RequestParam(value="oc", required=false) String orderColumn,
             @RequestParam(value="al", required=false) String align,
             Model model) throws Exception {
@@ -36,10 +36,12 @@ public class RoomController {
             pageSize = 5;
         }
         
-        HashMap<String,Object> params = new HashMap<>();
-        params.put("words", words);
-        params.put("orderColumn", orderColumn);
-        params.put("align", align);
+        HashMap<String,Object> options = new HashMap<>();
+        if (words != null && words[0].length() > 0) {
+            options.put("words", words);
+        }
+        options.put("orderColumn", orderColumn);
+        options.put("align", align);
         
         int totalCount = roomService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
@@ -50,7 +52,7 @@ public class RoomController {
         // view 컴포넌트가 사용할 값을 Model에 담는다.
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("lastPageNo", lastPageNo);
-        model.addAttribute("list", roomService.list(pageNo, pageSize, params));
+        model.addAttribute("list", roomService.list(pageNo, pageSize, options));
         return "room/list";
     }
     
@@ -73,6 +75,8 @@ public class RoomController {
         return "redirect:list";
     }
 }
+
+
 
 
 

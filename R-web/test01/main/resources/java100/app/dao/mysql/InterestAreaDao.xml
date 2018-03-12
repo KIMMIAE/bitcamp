@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DAO 객체를 자동으로 생성하려면,
+     namespace의 값이 인터페이스 이름과 같아야 한다. -->
+<mapper namespace="java100.app.dao.InterestAreaDao">
+
+    <resultMap type="interestArea" id="interestAreaMap">
+        <id column="areano" property="areaNo"/>
+        <result column="areanm" property="areaName"/>
+        <result column="mmbno" property="MemberNo"/>
+<!--         <result column="intarea" property="interstArea"/>
+        <result column="intrpart" property="interstPart"/> -->
+    </resultMap>
+
+<!-- 
+    <sql id="select1">
+        select 
+            mmbno,
+            nicknm,
+            email,
+            type,
+            msgfl,
+            msgid,
+            cancelfl,
+            regdt
+    </sql>
+
+ -->
+     <insert id="insert" parameterType="interestArea">
+           insert into tb_intrarea(areano,mmbno)
+           values(#{areaNo},#{MemberNo})
+    </insert>
+    
+    <!-- 
+
+    <update id="update" parameterType="artist">
+        update tb_artist set 
+            artnm=#{artistName},
+            artmmb=#{artistMember},
+            profile=#{profile},
+            joindt=#{joinDate}
+        where artno=#{artistNo}
+    </update>
+
+       <delete id="delete" parameterType="int">
+        delete from tb_artist
+        where artno=#{value}
+    </delete>
+     -->
+</mapper>
+
+
+
+
+
+
+
+
+

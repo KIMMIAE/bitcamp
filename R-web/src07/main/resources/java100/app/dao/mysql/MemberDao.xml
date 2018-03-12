@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DAO 객체를 자동으로 생성하려면,
+     namespace의 값이 인터페이스 이름과 같아야 한다. -->
+<mapper namespace="java100.app.dao.MemberDao">
+
+    <resultMap type="member" id="memberMap">
+        <id column="mmbno" property="no"/>
+        <result column="nicknm" property="nickname"/>
+        <result column="email" property="email"/>
+        <result column="msgfl" property="messageFlag"/>
+        <result column="msgid" property="messageId"/>
+        <result column="cancelfl" property="cancleFlag"/>
+        <result column="type" property="type"/>
+        <!-- 컬럼 이름과 프로퍼티 이름이 같아서 생략! -->
+        <!--  
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        -->
+        <result column="pwd" property="password"/>
+        <result column="regdt" property="regDate"/>
+        
+        <association property="artist" javaType="artist">
+            <id     column="a_artno"       property="artistNo"/>
+            <result column="artnm"   property="artistName"/>
+            <result column="artmmb" property="artistMember"/>
+            <result column="profile" property="profile"/>
+            <result column="joindt" property="joinDate"/>
+        </association>
+    </resultMap>
+
+
+    <sql id="select1">
+        select 
+            mmbno,
+            nicknm,
+            email,
+            type,
+            msgfl,
+            msgid,
+            cancelfl,
+            regdt
+    </sql>
+
+    <select id="findAll" resultMap="memberMap" parameterType="map">
+        select
+            m.mmbno,
+            m.nicknm,
+            m.email,
+            m.regdt,
+            a.artnm
+        from
+        tb_memb as m
+        join tb_artist as a on m.mmbno=a.artno
+
+        <if test="words != null">
+	        <where>
+	            nicknm in 
+	            <foreach collection="words" item="word" 
+	                     open="(" close=")" separator=",">
+	                #{word}
+	            </foreach>
+	            or email in 
+                <foreach collection="words" item="word" 
+                         open="(" close=")" separator=",">
+                    #{word}
+                </foreach>
+	        </where>
+        </if>
+
+        
+        <!-- 정렬 조건에 따라 SQL문을 변경한다.-->
+
+        order by 
+        <choose>
+            <when test="orderColumn == 'email' and align == 'asc'">
+                email asc
+            </when>
+            <when test="orderColumn == 'email' and align == 'desc'">
+                email desc
+            </when>
+            <when test="orderColumn == 'regdt' and align == 'asc'">
+                regdt asc
+            </when>
+            <when test="orderColumn == 'regdt' and align == 'desc'">
+                regdt desc
+            </when>
+            <when test="orderColumn == 'nicknm' and align == 'desc'">
+                nicknm desc
+            </when>
+            <otherwise>
+                nicknm asc
+            </otherwise>
+        </choose>
+
+        <!-- 페이지징 처리 -->
+
+        limit #{startIndex}, #{size}
+    </select>
+    
+    <select id="findByNo" resultMap="memberMap" parameterType="int">
+        select
+            m.mmbno,
+            m.nicknm,
+            m.email,
+            m.msgfl,
+            m.msgid,
+            m.type,
+            m.cancelfl,
+            m.regdt,
+            m.pwd,
+            a.artno as a_artno,
+            a.artnm,
+            a.artmmb,
+            a.profile,
+            a.joindt
+        from
+            tb_memb as m
+            join tb_artist as a on m.mmbno=a.artno
+        where m.mmbno=#{value}
+        
+    </select>
+    
+    <select id="findByEmailAndPassword" 
+            resultMap="memberMap" parameterType="map">
+        <include refid="select1"/>
+        from tb_memb
+        where email=#{email} and pwd=password(#{password})
+    </select>
+    
+    <select id="countAll" resultType="int">
+        select count(*) from tb_memb
+    </select>
+   
+    
+    <insert id="insert" parameterType="member">
+        insert into tb_memb(nicknm,email,pwd,msgfl,msgid,cancelfl,type,regdt)
+        values(#{nickname},#{email},password(#{password}),#{messageFlag},#{messageId},#{cancleFlag},#{type},now())
+    </insert>
+
+    <update id="update" parameterType="member">
+        update tb_memb set 
+            nicknm=#{nickname},
+            email=#{email},
+            type=#{type},
+            msgfl=#{messageFlag},
+            msgid=#{messageId},
+            cancelfl=#{cancleFlag},
+            pwd=password(#{password})
+        where mmbno=#{no}
+    </update>
+
+
+    <delete id="delete" parameterType="int">
+        delete from tb_memb
+        where mmbno=#{value}
+    </delete>
+
+    
+</mapper>  
+
+
+
+
+
+
+
+
+

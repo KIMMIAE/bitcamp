@@ -40,6 +40,7 @@ public class RoomServiceImpl implements RoomService {
         return roomDao.insert(score);
     }
 
+
     @Override
     public int delete(int no) {
         return roomDao.delete(no);

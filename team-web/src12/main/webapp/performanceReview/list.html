@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>공연 후기</title>
+<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='../css/style1.css'>
+</head>
+<style>
+ .box1 {
+  float:left; 
+  width:450px; 
+  padding-right:20px;
+  height:auto;
+  border-right-width : 2px;
+  border-right-style : solid;
+  border-right-color : gray;}
+ .box2 {
+  display:inline-block; 
+  width:600px; 
+  padding-left:20px;
+  height:auto; 
+  }  
+ footer {
+    position:absolute;
+    display:inline-block;
+    width:450px; 
+    margin-top:30px;
+}
+  }
+</style>
+
+<body>
+    <div class='container'>
+        <header></header>
+
+    <div class="box1">
+
+    <h2>후기 등록</h2>
+
+<form id='formData'>
+<div class='form-group row my-view'>
+<label for='reviewNo' class='col-sm-2 col-form-label'>번호</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='reviewNo' type='number' name='reviewNo' value='0'>
+</div>
+</div>
+            
+<div class='form-group row' hidden="hidden">
+<label for='no' class='col-sm-2 col-form-label'>회원번호</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='memberNo' type='number' name='writer.no' value='0'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='nickName' class='col-sm-2 col-form-label'>닉네임</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='nickName' type='text' name='writer.nickName' value=''>
+</div>
+</div>
+
+<div class='form-group row my-new'>
+<label for='performance' class='col-sm-2 col-form-label'>공연정보</label>
+<div class='col-sm-10'>
+<input class='form-control-sm mr-sm-2 data-reset' readonly id='performance'
+type="number" placeholder="공연을 검색하세요" name='performance.no'>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
+  찾기
+</button>
+  </div>
+</div>
+<!-- modal 적용 전
+  <a id="findBtn" type="button" class="btn btn-primary btn-sm" href="search.html" role="button" aria-expanded="false" aria-controls="collapseExample">
+    찾기
+ </a>
+ -->
+
+<!-- Modal -->
+
+
+<div class='form-group row'>
+<label for='name' class='col-sm-2 col-form-label'>공연명</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='name' type='text' name='performance.name' value=''>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='artistName' class='col-sm-2 col-form-label'>아티스트명</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='artistName' type='text' name='artist.artistName' value=''>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='location' class='col-sm-2 col-form-label'>공연장소</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='location' type='text' name='performance.location' value=''>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='genre' class='col-sm-2 col-form-label'>공연장르</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='genre' type='text' name='performance.genre' value=''>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='entryDate' class='col-sm-2 col-form-label'>공연날짜</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='entryDate' type='date' name='performance.entryDate'>
+</div>
+</div>
+
+
+<div class='form-group row'>
+<label for='reviewDescription' class='col-sm-2 col-form-label'>후기내용</label>
+<div class='col-sm-10'>
+<textarea class='form-control data-reset' id='reviewDescription'
+type='text' placeholder="내용을 입력하세요" name='reviewDescription' value=''></textarea>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='reviewFiles1' class='col-sm-2 col-form-label'>파일1</label>
+<div id=fileDiv class='col-sm-10'>
+<input type="file" class="form-control-file" id="reviewFiles1" name="files" value=''>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='reviewFiles2' class='col-sm-2 col-form-label'>파일2</label>
+<div id=fileDiv class='col-sm-10'>
+<input type="file" class="form-control-file" id="reviewFiles2" name="files" value=''>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='reviewFiles3' class='col-sm-2 col-form-label'>파일3</label>
+<div id=fileDiv class='col-sm-10'>
+<input type="file" class="form-control-file" id="reviewFiles3" name="files" value=''>
+</div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      <div class="modal-body">
+                    <h2>공연 검색</h2>
+                    <nav class="navbar navbar-light justify-content-between">
+                        <form class="form-inline" >
+                            <input id="words" name="words"
+                                class="form-control form-control-xs" type="search"  style="width:350px; height:30px;"
+                                placeholder="내용을 입력하세요" aria-label="Search">
+                                <!-- mr-xs-2 --> 
+                            <button id="searchBtn"
+                                class="btn btn-sm btn-outline-success my-2 my-sm-0" type="button">Search</button>
+                        </form>
+                    </nav>
+            
+                    <table id="list" class='table table-hover'>
+                        <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>공연명</th>
+                                <th>아티스트명</th>
+                                <th>공연장소</th>
+                                <th>공연날짜</th>
+                            </tr>
+                        </thead>
+            
+                        <tbody></tbody>
+                    </table>
+            
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item"><a id="prevBtn" class="page-link"
+                                tabindex="-1">이전</a></li>
+            
+                            <li class="page-item"><a id="currBtn" class="page-link"
+                                href="#">1</a></li>
+            
+                            <li class="page-item "><a id="nextBtn" class="page-link"
+                                tabindex="0">다음</a></li>
+                        </ul>
+                    </nav>
+      </div>
+      <div class="modal-footer">
+        <button id="closeBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='form-group row'>
+<div class='col-sm-10'>
+<button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
+<!-- 검색 적용 전 button 
+<button id="findBtn" type="button" class='btn btn-primary btn-sm my-new'>찾기</button>
+-->
+</div>
+</div>
+</form>
+<footer></footer>
+    </div>
+    
+
+<div class="box2">
+
+        <h2>공연 후기</h2>
+
+        <nav class="navbar navbar-light justify-content-between">
+            <a href='form.html' class='btn btn-primary btn-sm'>추가</a>
+            <form class="form-inline">
+                <input id="reviewWords" name="reviewWords"
+                    class="form-control form-control-sm mr-sm-2" type="search"
+                    placeholder="검색" aria-label="Search">
+                <button id="reviewSearchBtn"
+                    class="btn btn-sm btn-outline-success my-2 my-sm-0" type="button">Search</button>
+            </form>
+        </nav>
+
+        <table id="reviewList" class='table table-hover'>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>닉네임</th>
+                    <th>후기내용</th>
+                    <th>조회수</th>
+                    <th>등록일</th>
+                </tr>
+            </thead>
+
+            <tbody></tbody>
+        </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a id="reviewPrevBtn" class="page-link"
+                    tabindex="-1">이전</a></li>
+
+                <li class="page-item"><a id="reviewCurrBtn" class="page-link"
+                    href="#">1</a></li>
+
+                <li class="page-item "><a id="reviewNextBtn" class="page-link"
+                    tabindex="0">다음</a></li>
+            </ul>
+        </nav>
+
+    </div>
+    </div>
+
+    <script src='../node_modules/jquery/dist/jquery.min.js'></script>
+    <script src='../node_modules/popper.js/dist/umd/popper.min.js'></script>
+    <script src='../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+
+    <script type="text/javascript">
+
+var reviewWords = $('#reviewWords'),
+    reviewSearchBtn = $('#reviewSearchBtn'),
+    reviewPrevBtn = $('#reviewPrevBtn'),
+    reviewCurrBtn = $('#reviewCurrBtn'),
+    reviewNextBtn = $('#reviewNextBtn'),
+    reviewTbody = $('#reviewList > tbody'),
+    reviewCurrPageNo = 1;
+
+    $('header').load('../header.html', () => {
+        load(1);
+    });
+
+    $('footer').load('../footer.html');
+
+
+    reviewSearchBtn.click(() => {
+        //event.preventDefault();
+        load(1, {
+            "reviewWords": $('#reviewWords').val()
+        })
+    });
+
+    reviewPrevBtn.click(() => {
+        load(reviewCurrPageNo - 1)
+    });
+
+    reviewNextBtn.click(() => {
+        load(reviewCurrPageNo + 1)
+    });
+
+    
+    
+function load(reviewPageNo, reviewOptions) {
+
+if (reviewOptions == undefined) reviewOptions = {};
+reviewOptions.pn = reviewPageNo;
+
+$.ajax('../json/performanceReview/list', {
+    /*method: 'GET',*/
+    data: reviewOptions,
+    dataType: 'json',
+    success: (reviewResult) => {
+        
+        reviewTbody.html(""); // <tbody> 콘텐츠를 지운다.
+        var reviewFilename;
+        for (var reviewData of reviewResult.reviewList) {
+            for (var reviewMedia of reviewData.reviewFiles) {
+                if (reviewMedia.reviewFilename == null) {
+                    reviewFilename = 'no_img.jpg';
+                }else {
+                    reviewFilename = reviewMedia.reviewFilename;
+                }
+            }
+            $('<tr>')
+                .html(  
+                    "<td>" + reviewData.reviewNo + "</td>" +
+                    "<td>" + reviewData.writer.nickName + "</td>" +
+                    "<td><a href='form.html?no=" + reviewData.reviewNo + "'>" +
+                    "<img src='../download/" + reviewFilename + "' height=50>" + 
+                    "<div>" + reviewData.reviewDescription + "</a></td>" + 
+                    "<td>" + reviewData.viewCount + "</td>" +
+                    "<td>" +  formatDate(reviewData.regDate) + "</td>")
+                .appendTo(reviewTbody);
+        }
+        
+        reviewCurrPageNo = reviewResult.reviewPageNo;
+        reviewCurrBtn.html(reviewCurrPageNo);
+        
+        if (reviewResult.reviewPageNo == 1) {
+            $(reviewPrevBtn.parent()).addClass("disabled");
+        } else {
+            $(reviewPrevBtn.parent()).removeClass("disabled");
+        }
+        
+        if (reviewResult.reviewLastPageNo == reviewResult.reviewPageNo) {
+            $(reviewNextBtn.parent()).addClass("disabled");
+        } else {
+            $(reviewNextBtn.parent()).removeClass("disabled");
+        }
+    },
+    error: () => {
+        window.alert('서버 실행 오류!');
+    }
+});
+
+function formatDate(json) {
+    var jasondate = new Date(json) 
+
+    return jasondate.getFullYear() + '년 ' + 
+      (jasondate.getMonth() + 1) + '월 ' + 
+      jasondate.getDate() + '일 '  
+    }
+
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

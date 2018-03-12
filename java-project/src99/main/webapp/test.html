@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+    <link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"> -->
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <h1>템플릿 사용 예</h1>
+<div id="d1"></div>
+
+<script src='../node_modules/handlebars/dist/handlebars.min.js'></script>
+<script src='../node_modules/jquery/dist/jquery.min.js'></script>
+
+<script id="entry-template" type="text/x-handlebars-template">
+  <p>{{name}}({{email}})</p>
+</script>
+<script type="text/javascript">
+
+var templateSrc = $('#t1').html();
+
+var template = Handlebars.compile(templateSrc);
+
+var dataObj = {
+        {name: '홍길동',
+        email: 'hong@test.com'
+        
+};
+
+var html = template(dataObj);
+$('#d1').html(html);
+</script>
+
+  </body>
+</html>

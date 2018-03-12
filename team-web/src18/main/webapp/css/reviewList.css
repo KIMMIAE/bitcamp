@@ -1,0 +1,60 @@
+@charset "utf-8";
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic');
+
+
+*{margin:0;padding:0;}
+a { text-decoration: none; color: #222;}
+
+.nike-air h4 {
+    border-top: 1px solid lightgray;
+    margin: 0 1%;
+    padding-top: 10px;
+    font-size: 28px;
+}
+
+.items figure img{
+    width: 100%;   
+    height:200px;
+}
+.items figure{
+    width: 23%;
+    margin: 1%;
+    float:left;
+}
+.items figure figcaption{
+    text-align: center;
+}
+
+.items figure a{
+    display: block;
+    font-size: 10px;
+}
+.items figure img{
+    transition: all 0.5s ease-in-out;    
+}
+.items figure img:hover{
+    transform: scale(1.2);
+}    
+
+  .box1 {
+  float:left; 
+  display: block;
+  margin-top: -10px;
+  padding-right:10px;
+  height:auto;
+}
+ .box2 {
+  display:inline-block; 
+  width:600px; 
+  padding-left:10px;
+  height:auto; 
+  }  
+ footer {
+    position:absolute;
+    display:inline-block;
+    width:450px; 
+    margin-top:30px;
+}

@@ -19,12 +19,12 @@
         <include refid="select1"/>
         from ex_score
 
-        <if test="names != null">
-            <where>
-                <foreach collection="names" item="name">
-                    or name like '${name}%'
-                </foreach>
-            </where>
+        <if test="words != null">
+	        <where>
+	            <foreach collection="words" item="word">
+	                or name like '${word}%'
+	            </foreach>
+	        </where>
         </if>
         
         <!-- 정렬 조건에 따라 SQL문을 변경한다.-->
@@ -44,8 +44,8 @@
             </otherwise>
         </choose>
         
+        <!-- 페이지징 처리 -->
         limit #{startIndex}, #{size}
-        
     </select>
     
     <select id="findByNo" resultType="score" parameterType="int">
@@ -57,7 +57,7 @@
         where no=#{value}
     </select>
     
-      <select id="countAll" resultType="int">
+    <select id="countAll" resultType="int">
         select count(*) from ex_score
     </select>
     
@@ -81,6 +81,11 @@
     </delete>
     
 </mapper>  
+
+
+
+
+
 
 
 

@@ -42,7 +42,7 @@
 </div>
 <div class='form-group row'>
 <div class='col-sm-10'>
-<button class='btn btn-primary btn-sm'>추가</button>
+<button id="submitBtn" class='btn btn-primary btn-sm'>추가</button>
 </div>
 </div>
 </form>
@@ -53,6 +53,38 @@
 
 <jsp:include page="../jslib.jsp"/>
 
+<script src='../../node_modules/jquery/dist/jquery.min.js'></script>
+<script type="text/javascript">
+var korItem = $('#kor'),
+    engItem = $('#eng'),
+    mathItem = $('#math');
+
+$('#submitBtn').click((event) => {
+    /*
+    if (korItem.val() == "" || engItem.val() == "" || mathItem.val() == "") {
+        alert("국어, 영어, 수학 점수는 필수 입력 항목입니다!");
+        event.preventDefault();
+    }
+    */
+});
+
+</script>
+
+
+
+
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
     

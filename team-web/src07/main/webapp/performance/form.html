@@ -1,0 +1,412 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>공연정보</title>
+<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='../../css/style1.css'>
+
+</head>
+<body>
+<div class='container'>
+<header></header>
+
+<h1>공연 등록</h1>
+
+<form id='formData' enctype="multipart/form-data">
+
+
+<div class='form-group row my-view' hidden="hidden">
+<label for='no' class='col-sm-2 col-form-label'>번호</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='no' type='number' name='no' value='0'>
+</div>
+</div>
+
+<div class='form-group row my-view' hidden="hidden">
+<label for='memberNo' class='col-sm-2 col-form-label'>회원번호</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='memberNo' type='number' name='memberNo' value='0'>
+</div>
+</div>
+
+
+<div class='form-group row'>
+<label class='col-sm-2 col-form-label'>공연사진/영상</label>
+<div class='col-sm-10' id='medias' value=''>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='name' class='col-sm-2 col-form-label'>공연명</label>
+<div class='col-sm-10'>
+<input class='form-control' id='name' type='text' name='name' value=''>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='genre' class='col-sm-2 col-form-label'>공연장르</label>
+<div class='col-sm-10'>
+
+<select class="custom-select" id="genre" name="genre" value=''>
+  <option selected></option>
+  <option value='솔로'>솔로</option>
+  <option value='그룹'>그룹</option>
+  <option value='발라드'>발라드</option>
+  <option value='R & B'>R & B</option>
+  <option value='락'>락</option>
+  <option value='랩'>랩</option>
+  <option value='개그'>개그</option>
+  <option value='마술'>마술</option>
+</select>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='joinDate' class='col-sm-2 col-form-label'>공연날짜</label>
+<div class='col-sm-10'>
+<input class='form-control' id='entryDate' type='date' name='entryDate'  value=''>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='location' class='col-sm-2 col-form-label'>공연장소</label>
+<div class='col-sm-10'>
+<input class='form-control' id='location' type='text' name='location' value=''>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='detailDesc' class='col-sm-2 col-form-label'>공연내용</label>
+<div class='col-sm-10'>
+<textarea class='form-control' id='detailDesc' name='detailDesc' value=''></textarea>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='specialDesc' class='col-sm-2 col-form-label'>특이사항</label>
+<div class='col-sm-10'>
+<input class='form-control' id='specialDesc' type='text' name='specialDesc' value=''>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='file1' class='col-sm-2 col-form-label'>파일1</label>
+<div class='col-sm-10'>
+<input type="file" class="form-control-file" id="file1" name="files" value=''>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='file2' class='col-sm-2 col-form-label'>파일2</label>
+<div class='col-sm-10'>
+<input type="file" class="form-control-file" id="file2" name="files" value=''>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='file3' class='col-sm-2 col-form-label'>파일3</label>
+<div class='col-sm-10'>
+<input type="file" class="form-control-file" id="file3" name="files" value=''>
+</div>
+</div>
+
+<!-- 
+<div class='form-group row'>
+<label for='jjim' class='col-sm-2 col-form-label'>찜</label>
+<div class='col-sm-10'>
+    <input type='checkbox' id='jjim' name='jjim' value=''>
+    <label for='jjim'class='col-sm-4 col-form-label'>찜</label>
+    
+    <label for='rating' class='col-sm-2 col-form-label'>평가</label>
+    <input class='col-sm-2' type='number' min="-10" max="100" id='rating' name='rating' value=''>
+    <button id="ratingBtn"type="button" class='btn btn-primary btn-sm'>점수주기</button>
+    
+</div>
+</div>
+<div class='form-group row'>
+<label for='ripple' class='col-sm-2 col-form-label'>댓글</label>
+<div class='col-sm-10'>
+<textarea class='form-control' id='ripple' name='ripple' value=''></textarea>
+<button id="rippleBtn"type="button" class='btn btn-primary btn-sm'>등록</button>
+</div>
+</div>
+ -->
+
+<div class='form-group row'>
+<div class='col-sm-10'>
+<button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
+<button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
+<button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
+</div>
+</div>
+</form>
+
+<footer></footer>
+</div>
+ 
+
+<script src='../node_modules/jquery/dist/jquery.min.js'></script>
+<!-- <script src='../node_modules/jquery/dist/jquery.form.min.js'></script> -->
+<script src='../node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<!-- <script src='../js/bit.js'></script> -->
+
+
+<script type="text/javascript">
+var addBtn = $('#addBtn'),
+    updateBtn = $('#updateBtn'),
+    deleteBtn = $('#deleteBtn'),
+    rippleBtn = $('#rippleBtn'),
+    ratingBtn = $('#ratingBtn'),
+    noItem = $('#no'),
+    memberNoItem = $('#memberNo'),
+    nameItem = $('#name'),
+    genreItem = $('#genre'),
+    entryDateItem = $('#entryDate'),
+    locationItem = $('#location'),
+    detailDescItem = $('#detailDesc'),
+    specialDescItem = $('#specialDesc'),
+    mediasItem = $('#medias'),
+    file1Item = $('#file1'),
+    jjimItem = $('#jjim'),
+    ratingItem = $('#rating'),
+    rippleItem = $('#ripple');
+$('header').load('../header.html');
+$('footer').load('../footer.html');
+var index = location.href.indexOf('?');
+if (index != -1) { // 기존 데이터를 조회할 경우,
+    var qs = location.href.substr(index + 1);
+    var arr = qs.split('=');
+    $('.my-new').css('display', 'none');
+    
+    /* console.log(loginUser.type);
+    if (loginUser.type == '일반회원') {
+        $('.my-view').css('display', 'none');
+    } */
+    
+    $(() => {
+        
+        // 공연정보
+        $.ajax('../json/performance/' + arr[1], {
+            dataType: 'json',
+            async : false,
+            success: (result) => {
+                
+                //for (var i = 0; i < result.data.medias.length; i++) {
+                for (var data of result.data.medias) {
+                    if (data.filename != null) {
+                        mediasItem.append("<img src='../download/" + data.filename + "' height=100>");
+                        //mediasItem.append("<a href='/download/" + data.filename + "'>" + data.filename + "</a><br>");
+                    }
+                };
+                //noItem.val(result.data.no);
+                //memberNoItem.val(result.data.writer.no);
+                nameItem.val(result.data.name);
+                genreItem.append('<option selected>' + result.data.genre + '</option>')
+                entryDateItem.val(formatDate(result.data.entryDate));
+                locationItem.val(result.data.location);
+                detailDescItem.val(result.data.detailDesc);
+                specialDescItem.val(result.data.specialDesc);
+            },
+            error: () => {
+                window.alert('view 서버 실행 오류!');
+            }
+        });
+        
+        // 찜 정보
+        $.ajax('../json/performance/viewjjim', {
+            data: {
+                performanceNo: noItem.val(),
+                memberNo: memberNoItem.val()
+            },
+            dataType: 'json',
+            method: 'POST',
+            success: (result) => {
+                if (result.jjim == 1) {
+                    jjimItem.prop("checked", true);
+                } else {
+                    jjimItem.prop("checked", false);
+                }
+            },
+            error: () => {
+                window.alert('viewjjim 서버 실행 오류!');
+            }
+        });
+        
+        // 리플
+        /* $.ajax('../json/performance/viewripple', {
+            data: {
+                performanceNo: noItem.val(),
+                memberNo: memberNoItem.val()
+            },
+            dataType: 'json',
+            method: 'POST',
+            success: (result) => {
+                
+                tbody.html("");
+                
+                for (var data of result.list) {
+                    $('<tr>').
+                        html(
+                            "<td>" + data.no + "</td>" + 
+                            "<td><a href='form.html?no=" + data.no + "'>" + data.artist.artistName + "</a></td>" +
+                            "<td>" + data.name + "</td>" +
+                            "<td>" + data.genre + "</td>" +
+                            "<td>" + formatDate(data.entryDate) + "</td>" +
+                            "<td>" + data.location + "</td>" +
+                            "<td>" + data.writer.nickName + "</td>" +
+                            "<td>" + data.viewCount + "</td>")
+                        .appendTo(tbody);
+                }
+            },
+            error: () => {
+                window.alert('서버 실행 오류!');
+            }
+        }); */
+        // 찜 정보
+        /* $.ajax('../json/performance/viewripple', {
+            data: {
+                performanceNo: noItem.val(),
+                memberNo: memberNoItem.val()
+            },
+            dataType: 'json',
+            method: 'POST',
+            success: (result) => {
+                rippleItem.val(result.ripple);
+            },
+            error: () => {
+                window.alert('viewripple 서버 실행 오류!');
+            }
+        }); */
+    });
+    
+} else { // 신규 데이터 입력일 경우,
+    $('.my-view').css('display', 'none');
+}
+addBtn.click(() => {
+    var formData = new FormData($("#formData")[0]);
+    
+    // 공연정보 전송
+    $.ajax({
+        url: '../json/performance/add',
+        data: formData,
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        //cache: false,
+        method: 'POST',
+        success: function(result) {
+            location.href = "list.html";
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+updateBtn.click(() => {
+    var formData = new FormData($("#formData")[0]);
+    $.ajax({
+       url: '../json/performance/update',
+       data: formData,
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       //cache: false,
+       method: 'POST',
+       success: function(result) {
+           location.href = "list.html";
+       },
+       error: () => {
+           window.alert('서버 실행 오류!');
+       }
+    });
+});
+deleteBtn.click(() => {
+    $.ajax('../json/performance/delete', {
+        data: {
+            no: noItem.val()
+        },
+        dataType: 'json',
+        success: (result) => {
+            location.href = "list.html";
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+$('#jjimFlag').click(function() {
+    var flag;
+    
+    if($(this).is(':checked')) {
+        flag = '1';
+    } else {
+        flag = '0';
+    }
+    
+    $.ajax('../json/performance/jjim', {
+        data: {
+            performanceNo: noItem.val(),
+            memberNo: memberNoItem.val(),
+            jjimFlag: flag,
+        },
+        dataType: 'json',
+        success: (result) => {
+            //location.href = "list.html";
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+ratingBtn.click(() => {
+    $.ajax('../json/performance/addrating', {
+        data: {
+            performanceNo: noItem.val(),
+            memberNo: memberNoItem.val(),
+            score: ratingItem.val()
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: (result) => {
+            window.alert('서버 실행 성공!');
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+rippleBtn.click(() => {
+    $.ajax('../json/performance/addripple', {
+        data: {
+            performanceNo: noItem.val(),
+            memberNo: memberNoItem.val(),
+            ripple: rippleItem.val()
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: (result) => {
+            window.alert('서버 실행 성공!');
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+function formatDate(jason) {
+    var jasondate = new Date(jason);
+            
+    return jasondate.getFullYear() + '-' +
+    pad((jasondate.getMonth() + 1), 2) + '-' +
+    pad(jasondate.getDate(), 2);
+}
+function pad(n, width) {
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+}
+</script>
+
+
+</body>
+</html>

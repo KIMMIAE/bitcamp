@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>페이스북 로그인</h1>
+
+<script id="s1" type="text/javascript"></script>
+<script id="s2" type="text/javascript"></script>
+<script id="s3" type="text/javascript"></script>
+<script id="s4" type="text/javascript"></script>
+
+<script type="text/javascript">
+// 페이스북 자바스크립트 SDK 파일을 가져온 후에 호출될 함수를 등록한다.
+//  => 즉 sdk.js 파일을 실행할 때 이 함수를 찾아 호출한다.
+window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '743348825863811', /* 개발자가 등록한 앱 ID */
+      cookie     : true,  // enable cookies to allow the server to access 
+                          // the session
+      xfbml      : true,  // parse social plugins on this page
+      version    : 'v2.12' // use graph api version 2.8
+    });
+  };
+
+// 페이스북 SDK 라이브러리파일 로드
+// - 동적으로 script 태그를 만든다
+// 웹브라우저는 당연히 동적으로 생성된 script 태그를 실행할 것이다.
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  
+  (function (a, b) {
+      console.log(a + b);
+  })(10, 20); 
+  
+  (function (a, b) {
+      console.log(a + b);
+  }(10, 20)); // -> 함수를 정의한 후 딱 한 번만 호출할 때 이런 형식으로 씀. 괄호를 치는 게 중요.
+  
+  
+
+
+
+</script>
+</body>
+</html>
